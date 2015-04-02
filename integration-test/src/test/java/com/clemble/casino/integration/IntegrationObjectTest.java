@@ -12,8 +12,10 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 
 import com.clemble.casino.bet.Bet;
+import com.clemble.casino.bet.configuration.BetConfiguration;
 import com.clemble.casino.goal.lifecycle.management.GoalState;
 import com.clemble.casino.goal.post.GoalStartedPost;
+import com.clemble.casino.lifecycle.configuration.Configuration;
 import com.clemble.casino.lifecycle.configuration.rule.bet.FixedBidRule;
 import com.clemble.casino.notification.PlayerNotification;
 import com.clemble.casino.payment.*;
@@ -60,6 +62,12 @@ import com.clemble.test.random.ValueGenerator;
 public class IntegrationObjectTest {
 
     static {
+        ObjectGenerator.register(Configuration.class, new AbstractValueGenerator<Configuration>() {
+            @Override
+            public Configuration generate() {
+                return new BetConfiguration(UnlimitedBetRule.INSTANCE);
+            }
+        });
         ObjectGenerator.register(DateTimeZone.class, new AbstractValueGenerator<DateTimeZone>() {
             @Override
             public DateTimeZone generate() {

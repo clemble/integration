@@ -103,15 +103,14 @@ public class SimplePlayerScenarios implements PlayerScenarios {
             }
         });
         // Step 1. Checking listener was able to connect
-        AsyncUtils.check(() -> player.listenerOperations().isAlive());
+        AsyncUtils.verify(() -> player.listenerOperations().isAlive());
         // Step 2. Checking registration && daily bonus received
         final String registrationTransaction = RegistrationBonusPaymentSource.INSTANCE.toTransactionKey(player.getPlayer());
-        AsyncUtils.check(() -> player.paymentOperations().getTransaction(registrationTransaction) != null);
-        AsyncUtils.check(() -> player.paymentOperations().myTransactionsBySource("dailybonus").size() > 0);
+        AsyncUtils.verify(() -> player.paymentOperations().getTransaction(registrationTransaction) != null);
         // Step 3. Getting PaymentTransaction
-        AsyncUtils.checkNotNull(() -> player.profileOperations().myProfile());
+        AsyncUtils.verifyNotNull(() -> player.profileOperations().myProfile());
         // Step 4. Getting PlayerConnection
-        AsyncUtils.checkNotNull(() -> player.connectionOperations().myConnections());
+        AsyncUtils.verifyNotNull(() -> player.connectionOperations().myConnections());
         return player;
     }
 

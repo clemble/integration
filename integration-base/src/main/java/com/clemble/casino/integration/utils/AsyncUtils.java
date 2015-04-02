@@ -16,6 +16,10 @@ public class AsyncUtils {
         Assert.assertTrue(check(check));
     }
 
+    public static <T> void verifyNotNull(Callable<T> check) {
+        Assert.assertNotNull(checkNotNull(check));
+    }
+
     public static <T> void verifyEquals(Callable<T> A, Callable<T> B) throws Exception {
         boolean check = check(() -> {
             try {

@@ -5,3 +5,8 @@ machine:
     - docker
     - rabbitmq-server
     - neo4j
+
+dependencies:
+  override:
+    - rm -rf ~/.m2/repository/com/clemble
+    - mvn install

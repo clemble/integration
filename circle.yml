@@ -1,6 +1,8 @@
 machine:
   java:
     version: oraclejdk8
+  environment:
+    JAVA_OPTS: -Xms256m -Xmx512m
   services:
     - docker
     - rabbitmq-server

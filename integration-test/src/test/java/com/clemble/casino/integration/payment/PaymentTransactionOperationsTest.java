@@ -66,7 +66,7 @@ public class PaymentTransactionOperationsTest {
 
         expectedException.expect(ClembleCasinoExceptionMatcherFactory.fromErrors(ClembleCasinoError.PaymentTransactionDebitAndCreditNotMatched));
 
-        eventListener.onEvent(new SystemPaymentTransactionRequestEvent(paymentTransaction));
+        eventListener.onEvent(SystemPaymentTransactionRequestEvent.create(paymentTransaction));
     }
 
     @Test
@@ -82,7 +82,7 @@ public class PaymentTransactionOperationsTest {
                 .addOperation(
                         new PaymentOperation(anotherPlayer.getPlayer(), Money.create(Currency.point, 50), Operation.Debit));
 
-        eventListener.onEvent(new SystemPaymentTransactionRequestEvent(paymentTransaction));
+        eventListener.onEvent(SystemPaymentTransactionRequestEvent.create(paymentTransaction));
 
         PaymentTransaction savedPaymentTransaction = transactionRepository.findOne(paymentTransaction.getTransactionKey());
         assertEquals(savedPaymentTransaction, paymentTransaction);
@@ -104,7 +104,7 @@ public class PaymentTransactionOperationsTest {
                 .addOperation(
                         new PaymentOperation(anotherPlayer.getPlayer(), Money.create(Currency.point, 50), Operation.Debit));
 
-        eventListener.onEvent(new SystemPaymentTransactionRequestEvent(paymentTransaction));
+        eventListener.onEvent(SystemPaymentTransactionRequestEvent.create(paymentTransaction));
 
         PaymentTransaction savedPaymentTransaction = transactionRepository.findOne(paymentTransaction.getTransactionKey());
 
@@ -113,7 +113,6 @@ public class PaymentTransactionOperationsTest {
 
     // TODO restore @Test
     public void testInValidTransactionAccess() {
-        String source = "TicTacToe";
         String transactionId = ObjectGenerator.generate(String.class);
 
         ClembleCasinoOperations player = playerOperations.createPlayer();
@@ -127,7 +126,7 @@ public class PaymentTransactionOperationsTest {
             .addOperation(
                     new PaymentOperation(anotherPlayer.getPlayer(), Money.create(Currency.point, 50), Operation.Debit));
 
-        eventListener.onEvent(new SystemPaymentTransactionRequestEvent(paymentTransaction));
+        eventListener.onEvent(SystemPaymentTransactionRequestEvent.create(paymentTransaction));
 
         PaymentTransaction savedPaymentTransaction = transactionRepository.findOne(paymentTransaction.getTransactionKey());
 

@@ -5,7 +5,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import com.clemble.casino.client.goal.GoalOperations;
 import com.clemble.casino.integration.IntegrationPlayerTagService;
 import com.clemble.casino.integration.payment.IntegrationPlayerAccountService;
-import com.clemble.casino.payment.service.PaymentTransactionOperations;
 import com.clemble.casino.payment.service.PaymentTransactionService;
 import com.clemble.casino.payment.service.PlayerAccountService;
 import com.clemble.casino.player.service.*;

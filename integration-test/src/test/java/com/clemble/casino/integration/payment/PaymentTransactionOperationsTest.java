@@ -145,7 +145,7 @@ public class PaymentTransactionOperationsTest {
             @Override
             public PaymentTransaction get() {
                 String transactionKey = RegistrationBonusPaymentSource.INSTANCE.toTransactionKey(player.getPlayer());
-                return player.paymentOperations().getTransaction(transactionKey);
+                return player.paymentService().getTransaction(transactionKey);
             }
         }, 5_000);
         Collection<PaymentOperation> associatedOperation = new ArrayList<>();

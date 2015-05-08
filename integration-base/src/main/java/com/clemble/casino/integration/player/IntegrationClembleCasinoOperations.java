@@ -96,7 +96,7 @@ public class IntegrationClembleCasinoOperations implements ClembleCasinoOperatio
     }
 
     @Override
-    public PlayerImageService imageOperations() {
+    public PlayerImageService imageService() {
         return imageOperations;
     }
 
@@ -126,7 +126,7 @@ public class IntegrationClembleCasinoOperations implements ClembleCasinoOperatio
     }
 
     @Override
-    public PaymentTransactionService paymentOperations() {
+    public PaymentTransactionService paymentService() {
         return paymentTransactionOperations;
     }
 

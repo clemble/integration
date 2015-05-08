@@ -1,6 +1,6 @@
 package com.clemble.casino.integration.goal;
 
-import com.clemble.casino.goal.controller.GoalRecordServiceController;
+import com.clemble.casino.goal.controller.GoalRecordController;
 import com.clemble.casino.goal.lifecycle.record.GoalRecord;
 import com.clemble.casino.goal.lifecycle.record.service.GoalRecordService;
 import com.clemble.casino.lifecycle.record.RecordState;
@@ -13,9 +13,9 @@ import java.util.List;
 public class IntegrationGoalRecordService implements GoalRecordService {
 
     final private String player;
-    final private GoalRecordServiceController recordService;
+    final private GoalRecordController recordService;
 
-    public IntegrationGoalRecordService(String player, GoalRecordServiceController recordService) {
+    public IntegrationGoalRecordService(String player, GoalRecordController recordService) {
         this.player = player;
         this.recordService = recordService;
     }

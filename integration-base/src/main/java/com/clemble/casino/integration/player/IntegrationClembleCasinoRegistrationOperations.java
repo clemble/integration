@@ -9,21 +9,21 @@ import com.clemble.casino.integration.goal.IntegrationGoalOperationsFactory;
 import com.clemble.casino.player.PlayerProfile;
 import com.clemble.casino.registration.*;
 import com.clemble.casino.registration.service.PlayerSocialRegistrationService;
-import com.clemble.casino.server.connection.controller.PlayerFriendInvitationServiceController;
+import com.clemble.casino.server.connection.controller.PlayerFriendInvitationController;
 import com.clemble.casino.server.email.controller.PlayerEmailServiceController;
-import com.clemble.casino.server.post.controller.PlayerFeedServiceController;
-import com.clemble.casino.server.registration.controller.PlayerPasswordResetServiceController;
+import com.clemble.casino.server.post.controller.PlayerFeedController;
+import com.clemble.casino.server.registration.controller.PlayerPasswordServiceController;
 import com.clemble.casino.server.registration.controller.PlayerRegistrationController;
 import com.clemble.casino.social.SocialAccessGrant;
 import com.clemble.casino.social.SocialConnectionData;
-import com.clemble.casino.server.connection.controller.PlayerConnectionServiceController;
-import com.clemble.casino.server.payment.controller.PaymentTransactionServiceController;
-import com.clemble.casino.server.payment.controller.PlayerAccountServiceController;
+import com.clemble.casino.server.connection.controller.PlayerConnectionController;
+import com.clemble.casino.server.payment.controller.PaymentTransactionController;
+import com.clemble.casino.server.payment.controller.PlayerAccountController;
 import com.clemble.casino.server.profile.controller.PlayerImageServiceController;
-import com.clemble.casino.server.profile.controller.PlayerProfileServiceController;
-import com.clemble.server.tag.controller.PlayerTagServiceController;
+import com.clemble.casino.server.profile.controller.PlayerProfileController;
+import com.clemble.server.tag.controller.PlayerTagController;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.clemble.casino.server.notification.controller.PlayerNotificationServiceController;
+import com.clemble.casino.server.notification.controller.PlayerNotificationController;
 import org.springframework.mock.web.MockHttpServletResponse;
 
 public class IntegrationClembleCasinoRegistrationOperations implements ClembleCasinoRegistrationOperations {
@@ -32,19 +32,19 @@ public class IntegrationClembleCasinoRegistrationOperations implements ClembleCa
     final private ObjectMapper objectMapper;
     final private PlayerRegistrationController registrationController;
     final private PlayerSocialRegistrationService socialRegistrationController;
-    final private PlayerProfileServiceController profileOperations;
+    final private PlayerProfileController profileOperations;
     final private PlayerImageServiceController imageService;
-    final private PlayerConnectionServiceController connectionService;
-    final private PlayerFriendInvitationServiceController invitationService;
-    final private PlayerAccountServiceController paymentService;
-    final private PaymentTransactionServiceController paymentTransactionService;
+    final private PlayerConnectionController connectionService;
+    final private PlayerFriendInvitationController invitationService;
+    final private PlayerAccountController paymentService;
+    final private PaymentTransactionController paymentTransactionService;
     final private EventListenerOperationsFactory listenerOperations;
     final private IntegrationGoalOperationsFactory goalOperationsFactory;
-    final private PlayerNotificationServiceController notificationServiceController;
-    final private PlayerFeedServiceController feedServiceController;
-    final private PlayerPasswordResetServiceController passwordResetService;
+    final private PlayerNotificationController notificationServiceController;
+    final private PlayerFeedController feedServiceController;
+    final private PlayerPasswordServiceController passwordResetService;
     final private PlayerEmailServiceController emailServiceController;
-    final private PlayerTagServiceController tagServiceController;
+    final private PlayerTagController tagServiceController;
 
     public IntegrationClembleCasinoRegistrationOperations(
         String host,
@@ -52,18 +52,18 @@ public class IntegrationClembleCasinoRegistrationOperations implements ClembleCa
         EventListenerOperationsFactory listenerOperations,
         PlayerRegistrationController registrationController,
         PlayerSocialRegistrationService socialRegistrationController,
-        PlayerProfileServiceController profileOperations,
+        PlayerProfileController profileOperations,
         PlayerImageServiceController imageService,
-        PlayerConnectionServiceController connectionService,
-        PlayerFriendInvitationServiceController invitationService,
-        PlayerAccountServiceController accountOperations,
-        PaymentTransactionServiceController paymentTransactionService,
+        PlayerConnectionController connectionService,
+        PlayerFriendInvitationController invitationService,
+        PlayerAccountController accountOperations,
+        PaymentTransactionController paymentTransactionService,
         IntegrationGoalOperationsFactory goalOperationsFactory,
-        PlayerNotificationServiceController notificationServiceController,
-        PlayerFeedServiceController feedServiceController,
-        PlayerPasswordResetServiceController passwordResetService,
+        PlayerNotificationController notificationServiceController,
+        PlayerFeedController feedServiceController,
+        PlayerPasswordServiceController passwordResetService,
         PlayerEmailServiceController emailServiceController,
-        PlayerTagServiceController tagServiceController) {
+        PlayerTagController tagServiceController) {
         this.host = checkNotNull(host);
         this.objectMapper = checkNotNull(objectMapper);
         this.registrationController = checkNotNull(registrationController);

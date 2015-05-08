@@ -5,7 +5,7 @@ import static com.clemble.casino.utils.Preconditions.checkNotNull;
 import java.util.Set;
 
 import com.clemble.casino.player.service.PlayerConnectionService;
-import com.clemble.casino.server.connection.controller.PlayerConnectionServiceController;
+import com.clemble.casino.server.connection.controller.PlayerConnectionController;
 
 public class IntegrationPlayerConnectionService implements PlayerConnectionService {
 
@@ -15,9 +15,9 @@ public class IntegrationPlayerConnectionService implements PlayerConnectionServi
     private static final long serialVersionUID = 4966541707719576636L;
 
     final private String player;
-    final private PlayerConnectionServiceController connectionService;
+    final private PlayerConnectionController connectionService;
 
-    public IntegrationPlayerConnectionService(String player, PlayerConnectionServiceController connectionService) {
+    public IntegrationPlayerConnectionService(String player, PlayerConnectionController connectionService) {
         this.player = checkNotNull(player);
         this.connectionService = checkNotNull(connectionService);
     }

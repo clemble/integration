@@ -2,19 +2,19 @@ package com.clemble.casino.integration;
 
 import com.clemble.casino.tag.ClembleTag;
 import com.clemble.casino.tag.service.PlayerTagService;
-import com.clemble.server.tag.controller.PlayerTagServiceController;
+import com.clemble.server.tag.controller.PlayerTagController;
 
 import java.util.Set;
 
 /**
  * Created by mavarazy on 2/3/15.
  */
-public class IntegrationPlayerTagServiceController implements PlayerTagService {
+public class IntegrationPlayerTagService implements PlayerTagService {
 
     final private String player;
-    final private PlayerTagServiceController tagServiceController;
+    final private PlayerTagController tagServiceController;
 
-    public IntegrationPlayerTagServiceController(String player, PlayerTagServiceController tagServiceController) {
+    public IntegrationPlayerTagService(String player, PlayerTagController tagServiceController) {
         this.player = player;
         this.tagServiceController = tagServiceController;
     }

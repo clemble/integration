@@ -2,7 +2,7 @@ package com.clemble.casino.integration.player;
 
 import com.clemble.casino.player.Invitation;
 import com.clemble.casino.player.service.PlayerFriendInvitationService;
-import com.clemble.casino.server.connection.controller.PlayerFriendInvitationServiceController;
+import com.clemble.casino.server.connection.controller.PlayerFriendInvitationController;
 
 import java.util.List;
 
@@ -12,9 +12,9 @@ import java.util.List;
 public class IntegrationPlayerFriendInvitationService implements PlayerFriendInvitationService {
 
     final private String me;
-    final private PlayerFriendInvitationServiceController invitationService;
+    final private PlayerFriendInvitationController invitationService;
 
-    public IntegrationPlayerFriendInvitationService(String player, PlayerFriendInvitationServiceController invitationService) {
+    public IntegrationPlayerFriendInvitationService(String player, PlayerFriendInvitationController invitationService) {
         this.me = player;
         this.invitationService = invitationService;
     }

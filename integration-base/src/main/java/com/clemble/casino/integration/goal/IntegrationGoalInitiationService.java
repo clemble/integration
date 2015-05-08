@@ -1,7 +1,7 @@
 package com.clemble.casino.integration.goal;
 
 import com.clemble.casino.goal.lifecycle.initiation.GoalInitiation;
-import com.clemble.casino.goal.construction.controller.GoalInitiationServiceController;
+import com.clemble.casino.goal.construction.controller.GoalInitiationController;
 import com.clemble.casino.goal.lifecycle.initiation.service.GoalInitiationService;
 
 import java.util.Collection;
@@ -12,9 +12,9 @@ import java.util.Collection;
 public class IntegrationGoalInitiationService implements GoalInitiationService {
 
     final private String player;
-    final private GoalInitiationServiceController initiationService;
+    final private GoalInitiationController initiationService;
 
-    public IntegrationGoalInitiationService(String player, GoalInitiationServiceController initiationService) {
+    public IntegrationGoalInitiationService(String player, GoalInitiationController initiationService) {
         this.player = player;
         this.initiationService = initiationService;
     }

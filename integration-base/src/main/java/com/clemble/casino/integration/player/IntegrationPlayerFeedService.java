@@ -2,7 +2,7 @@ package com.clemble.casino.integration.player;
 
 import com.clemble.casino.player.service.PlayerFeedService;
 import com.clemble.casino.post.PlayerPost;
-import com.clemble.casino.server.post.controller.PlayerFeedServiceController;
+import com.clemble.casino.server.post.controller.PlayerFeedController;
 import com.clemble.casino.social.SocialProvider;
 
 /**
@@ -11,11 +11,11 @@ import com.clemble.casino.social.SocialProvider;
 public class IntegrationPlayerFeedService implements PlayerFeedService {
 
     final private String player;
-    final private PlayerFeedServiceController feedService;
+    final private PlayerFeedController feedService;
 
     public IntegrationPlayerFeedService(
         String player,
-        PlayerFeedServiceController feedService) {
+        PlayerFeedController feedService) {
         this.player = player;
         this.feedService = feedService;
     }

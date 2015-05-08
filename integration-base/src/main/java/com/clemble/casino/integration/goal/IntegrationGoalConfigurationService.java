@@ -1,6 +1,6 @@
 package com.clemble.casino.integration.goal;
 
-import com.clemble.casino.goal.configuration.controller.GoalConfigurationServiceController;
+import com.clemble.casino.goal.configuration.controller.GoalConfigurationController;
 import com.clemble.casino.goal.lifecycle.configuration.GoalConfiguration;
 import com.clemble.casino.goal.lifecycle.configuration.GoalConfigurationChoices;
 import com.clemble.casino.goal.lifecycle.configuration.IntervalGoalConfigurationBuilder;
@@ -15,9 +15,9 @@ import java.util.List;
 public class IntegrationGoalConfigurationService implements GoalConfigurationService {
 
     final private String player;
-    final private GoalConfigurationServiceController configurationService;
+    final private GoalConfigurationController configurationService;
 
-    public IntegrationGoalConfigurationService(String player, GoalConfigurationServiceController configurationService) {
+    public IntegrationGoalConfigurationService(String player, GoalConfigurationController configurationService) {
         this.player = player;
         this.configurationService = configurationService;
     }

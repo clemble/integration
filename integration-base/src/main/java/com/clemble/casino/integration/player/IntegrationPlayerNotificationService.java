@@ -2,7 +2,7 @@ package com.clemble.casino.integration.player;
 
 import com.clemble.casino.notification.PlayerNotification;
 import com.clemble.casino.player.service.PlayerNotificationService;
-import com.clemble.casino.server.notification.controller.PlayerNotificationServiceController;
+import com.clemble.casino.server.notification.controller.PlayerNotificationController;
 
 /**
  * Created by mavarazy on 11/29/14.
@@ -10,9 +10,9 @@ import com.clemble.casino.server.notification.controller.PlayerNotificationServi
 public class IntegrationPlayerNotificationService implements PlayerNotificationService {
 
     final private String player;
-    final private PlayerNotificationServiceController notificationService;
+    final private PlayerNotificationController notificationService;
 
-    public IntegrationPlayerNotificationService(String player, PlayerNotificationServiceController notificationService) {
+    public IntegrationPlayerNotificationService(String player, PlayerNotificationController notificationService) {
         this.player = player;
         this.notificationService = notificationService;
     }

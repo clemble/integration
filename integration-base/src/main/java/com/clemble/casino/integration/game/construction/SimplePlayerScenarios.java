@@ -36,7 +36,8 @@ public class SimplePlayerScenarios implements PlayerScenarios {
         PlayerProfile playerProfile = new PlayerProfile()
                 .setFirstName(RandomStringUtils.randomAlphabetic(10))
                 .setLastName(RandomStringUtils.randomAlphabetic(10))
-                .setNickName(RandomStringUtils.randomAlphabetic(10));
+                .setNickName(RandomStringUtils.randomAlphabetic(10))
+                .setTimezone("UTC");
         return register(credential, playerProfile);
     }
 

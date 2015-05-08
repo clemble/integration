@@ -47,7 +47,8 @@ public class PlayerOperationsITest {
             setFirstName("Anton").
             setLastName("Oparin").
             setGender(PlayerGender.M).
-            setNickName(nickName);
+            setNickName(nickName).
+            setTimezone("UTC");
 
         ClembleCasinoOperations player = playerOperations.createPlayer(profile);
 
@@ -64,10 +65,11 @@ public class PlayerOperationsITest {
         String nickName = RandomStringUtils.randomAlphabetic(9);
 
         PlayerProfile profile = new PlayerProfile().
-                setFirstName("Anton").
-                setLastName("Oparin").
-                setGender(PlayerGender.M).
-                setNickName(nickName);
+            setFirstName("Anton").
+            setLastName("Oparin").
+            setGender(PlayerGender.M).
+            setNickName(nickName).
+            setTimezone("UTC");
 
         PlayerCredential playerCredential = new PlayerCredential(RandomStringUtils.randomAlphabetic(10) + "@gmail.com", "23443545");
 

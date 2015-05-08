@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.clemble.casino.player.PlayerProfile;
 import com.clemble.casino.player.service.PlayerProfileService;
-import com.clemble.casino.server.profile.controller.PlayerProfileServiceController;
+import com.clemble.casino.server.profile.controller.PlayerProfileController;
 
 public class IntegrationPlayerProfileService implements PlayerProfileService {
 
@@ -16,9 +16,9 @@ public class IntegrationPlayerProfileService implements PlayerProfileService {
     private static final long serialVersionUID = 2044631083380608080L;
 
     final private String player;
-    final private PlayerProfileServiceController profileService;
+    final private PlayerProfileController profileService;
 
-    public IntegrationPlayerProfileService(String player, PlayerProfileServiceController profileService) {
+    public IntegrationPlayerProfileService(String player, PlayerProfileController profileService) {
         this.player = player;
         this.profileService = profileService;
     }

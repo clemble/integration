@@ -6,18 +6,18 @@ import java.util.List;
 
 import com.clemble.casino.payment.PaymentTransaction;
 import com.clemble.casino.payment.service.PaymentTransactionService;
-import com.clemble.casino.server.payment.controller.PaymentTransactionServiceController;
+import com.clemble.casino.server.payment.controller.PaymentTransactionController;
 
 public class IntegrationPaymentTransactionService implements PaymentTransactionService {
 
     private static final long serialVersionUID = -5498822576528068505L;
 
     final private String player;
-    final private PaymentTransactionServiceController paymentTransactionService;
+    final private PaymentTransactionController paymentTransactionService;
 
     public IntegrationPaymentTransactionService(
         String player,
-        PaymentTransactionServiceController paymentTransactionService) {
+        PaymentTransactionController paymentTransactionService) {
         this.player = checkNotNull(player);
         this.paymentTransactionService = checkNotNull(paymentTransactionService);
     }

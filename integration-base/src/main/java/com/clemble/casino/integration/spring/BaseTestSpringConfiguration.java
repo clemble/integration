@@ -6,29 +6,29 @@ import java.security.NoSuchAlgorithmException;
 
 import javax.annotation.PostConstruct;
 
-import com.clemble.casino.goal.configuration.controller.GoalConfigurationServiceController;
-import com.clemble.casino.goal.construction.controller.GoalConstructionServiceController;
-import com.clemble.casino.goal.construction.controller.GoalInitiationServiceController;
-import com.clemble.casino.goal.controller.GoalActionServiceController;
-import com.clemble.casino.goal.controller.GoalRecordServiceController;
+import com.clemble.casino.goal.configuration.controller.GoalConfigurationController;
+import com.clemble.casino.goal.construction.controller.GoalConstructionController;
+import com.clemble.casino.goal.construction.controller.GoalInitiationController;
+import com.clemble.casino.goal.controller.GoalActionController;
+import com.clemble.casino.goal.controller.GoalRecordController;
 import com.clemble.casino.goal.controller.GoalVictoryServiceController;
-import com.clemble.casino.goal.suggestion.controller.GoalSuggestionServiceController;
+import com.clemble.casino.goal.suggestion.controller.GoalSuggestionController;
 import com.clemble.casino.integration.goal.IntegrationGoalOperationsFactory;
 import com.clemble.casino.integration.player.IntegrationClembleCasinoRegistrationOperations;
 import com.clemble.casino.integration.player.IntegrationClembleCasinoRegistrationOperationsWrapper;
 import com.clemble.casino.registration.service.PlayerSocialRegistrationService;
-import com.clemble.casino.server.connection.controller.PlayerConnectionServiceController;
-import com.clemble.casino.server.connection.controller.PlayerFriendInvitationServiceController;
+import com.clemble.casino.server.connection.controller.PlayerConnectionController;
+import com.clemble.casino.server.connection.controller.PlayerFriendInvitationController;
 import com.clemble.casino.server.email.controller.PlayerEmailServiceController;
-import com.clemble.casino.server.notification.controller.PlayerNotificationServiceController;
-import com.clemble.casino.server.payment.controller.PaymentTransactionServiceController;
-import com.clemble.casino.server.payment.controller.PlayerAccountServiceController;
-import com.clemble.casino.server.post.controller.PlayerFeedServiceController;
+import com.clemble.casino.server.notification.controller.PlayerNotificationController;
+import com.clemble.casino.server.payment.controller.PaymentTransactionController;
+import com.clemble.casino.server.payment.controller.PlayerAccountController;
+import com.clemble.casino.server.post.controller.PlayerFeedController;
 import com.clemble.casino.server.profile.controller.PlayerImageServiceController;
-import com.clemble.casino.server.profile.controller.PlayerProfileServiceController;
-import com.clemble.casino.server.registration.controller.PlayerPasswordResetServiceController;
+import com.clemble.casino.server.profile.controller.PlayerProfileController;
+import com.clemble.casino.server.registration.controller.PlayerPasswordServiceController;
 import com.clemble.casino.server.registration.controller.PlayerRegistrationController;
-import com.clemble.server.tag.controller.PlayerTagServiceController;
+import com.clemble.server.tag.controller.PlayerTagController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -85,12 +85,12 @@ public class BaseTestSpringConfiguration implements TestSpringConfiguration {
 
         @Bean
         public IntegrationGoalOperationsFactory goalOperationsFactory(
-            GoalConfigurationServiceController configurationService,
-            GoalInitiationServiceController initiationService,
-            GoalSuggestionServiceController suggestionService,
-            GoalConstructionServiceController constructionService,
-            GoalActionServiceController actionServiceController,
-            GoalRecordServiceController recordServiceController,
+            GoalConfigurationController configurationService,
+            GoalInitiationController initiationService,
+            GoalSuggestionController suggestionService,
+            GoalConstructionController constructionService,
+            GoalActionController actionServiceController,
+            GoalRecordController recordServiceController,
             GoalVictoryServiceController victoryServiceController) {
             return new IntegrationGoalOperationsFactory(configurationService,
                 initiationService,
@@ -108,18 +108,18 @@ public class BaseTestSpringConfiguration implements TestSpringConfiguration {
             EventListenerOperationsFactory listenerOperations,
             PlayerRegistrationController registrationController,
             PlayerSocialRegistrationService socialRegistrationController,
-            PlayerProfileServiceController profileOperations,
+            PlayerProfileController profileOperations,
             PlayerImageServiceController imageService,
-            @Qualifier("playerConnectionController") PlayerConnectionServiceController connectionService,
-            PlayerFriendInvitationServiceController invitationService,
-            @Qualifier("playerAccountController") PlayerAccountServiceController accountOperations,
-            PaymentTransactionServiceController paymentTransactionService,
+            @Qualifier("playerConnectionController") PlayerConnectionController connectionService,
+            PlayerFriendInvitationController invitationService,
+            @Qualifier("playerAccountController") PlayerAccountController accountOperations,
+            PaymentTransactionController paymentTransactionService,
             IntegrationGoalOperationsFactory goalOperationsFactory,
-            PlayerNotificationServiceController notificationServiceController,
-            PlayerFeedServiceController feedServiceController,
-            PlayerPasswordResetServiceController resetServiceController,
+            PlayerNotificationController notificationServiceController,
+            PlayerFeedController feedServiceController,
+            PlayerPasswordServiceController resetServiceController,
             PlayerEmailServiceController emailServiceController,
-            PlayerTagServiceController tagServiceController) {
+            PlayerTagController tagServiceController) {
             ClembleCasinoRegistrationOperations registrationOperations = new IntegrationClembleCasinoRegistrationOperations(
                 host,
                 objectMapper,

@@ -1,10 +1,9 @@
 package com.clemble.casino.integration.payment;
 
-import com.clemble.casino.payment.PendingTransaction;
 import com.clemble.casino.payment.PlayerAccount;
 import com.clemble.casino.money.Currency;
 import com.clemble.casino.payment.service.PlayerAccountService;
-import com.clemble.casino.server.payment.controller.PlayerAccountServiceController;
+import com.clemble.casino.server.payment.controller.PlayerAccountController;
 
 import java.util.Collection;
 import java.util.List;
@@ -15,9 +14,9 @@ import java.util.List;
 public class IntegrationPlayerAccountService implements PlayerAccountService {
 
     final private String player;
-    final private PlayerAccountServiceController accountService;
+    final private PlayerAccountController accountService;
 
-    public IntegrationPlayerAccountService(String player, PlayerAccountServiceController accountService) {
+    public IntegrationPlayerAccountService(String player, PlayerAccountController accountService) {
         this.player = player;
         this.accountService = accountService;
     }

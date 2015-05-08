@@ -4,7 +4,7 @@ import com.clemble.casino.goal.lifecycle.construction.GoalSuggestion;
 import com.clemble.casino.goal.lifecycle.construction.GoalSuggestionRequest;
 import com.clemble.casino.goal.lifecycle.construction.GoalSuggestionResponse;
 import com.clemble.casino.goal.lifecycle.construction.service.GoalSuggestionService;
-import com.clemble.casino.goal.suggestion.controller.GoalSuggestionServiceController;
+import com.clemble.casino.goal.suggestion.controller.GoalSuggestionController;
 
 import java.util.List;
 
@@ -14,9 +14,9 @@ import java.util.List;
 public class IntegrationGoalSuggestionService implements GoalSuggestionService {
 
     final private String player;
-    final private GoalSuggestionServiceController suggestionService;
+    final private GoalSuggestionController suggestionService;
 
-    public IntegrationGoalSuggestionService(String player, GoalSuggestionServiceController suggestionServiceController) {
+    public IntegrationGoalSuggestionService(String player, GoalSuggestionController suggestionServiceController) {
         this.player = player;
         this.suggestionService = suggestionServiceController;
     }

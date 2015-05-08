@@ -11,7 +11,7 @@ import com.clemble.casino.goal.construction.controller.GoalConstructionControlle
 import com.clemble.casino.goal.construction.controller.GoalInitiationController;
 import com.clemble.casino.goal.controller.GoalActionController;
 import com.clemble.casino.goal.controller.GoalRecordController;
-import com.clemble.casino.goal.controller.GoalVictoryServiceController;
+import com.clemble.casino.goal.controller.GoalVictoryController;
 import com.clemble.casino.goal.suggestion.controller.GoalSuggestionController;
 import com.clemble.casino.integration.goal.IntegrationGoalOperationsFactory;
 import com.clemble.casino.integration.player.IntegrationClembleCasinoRegistrationOperations;
@@ -19,14 +19,14 @@ import com.clemble.casino.integration.player.IntegrationClembleCasinoRegistratio
 import com.clemble.casino.registration.service.PlayerSocialRegistrationService;
 import com.clemble.casino.server.connection.controller.PlayerConnectionController;
 import com.clemble.casino.server.connection.controller.PlayerFriendInvitationController;
-import com.clemble.casino.server.email.controller.PlayerEmailServiceController;
+import com.clemble.casino.server.email.controller.PlayerEmailController;
 import com.clemble.casino.server.notification.controller.PlayerNotificationController;
 import com.clemble.casino.server.payment.controller.PaymentTransactionController;
 import com.clemble.casino.server.payment.controller.PlayerAccountController;
 import com.clemble.casino.server.post.controller.PlayerFeedController;
-import com.clemble.casino.server.profile.controller.PlayerImageServiceController;
+import com.clemble.casino.server.profile.controller.PlayerImageController;
 import com.clemble.casino.server.profile.controller.PlayerProfileController;
-import com.clemble.casino.server.registration.controller.PlayerPasswordServiceController;
+import com.clemble.casino.server.registration.controller.PlayerPasswordController;
 import com.clemble.casino.server.registration.controller.PlayerRegistrationController;
 import com.clemble.server.tag.controller.PlayerTagController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,7 +91,7 @@ public class BaseTestSpringConfiguration implements TestSpringConfiguration {
             GoalConstructionController constructionService,
             GoalActionController actionServiceController,
             GoalRecordController recordServiceController,
-            GoalVictoryServiceController victoryServiceController) {
+            GoalVictoryController victoryServiceController) {
             return new IntegrationGoalOperationsFactory(configurationService,
                 initiationService,
                 suggestionService,
@@ -109,7 +109,7 @@ public class BaseTestSpringConfiguration implements TestSpringConfiguration {
             PlayerRegistrationController registrationController,
             PlayerSocialRegistrationService socialRegistrationController,
             PlayerProfileController profileOperations,
-            PlayerImageServiceController imageService,
+            PlayerImageController imageService,
             @Qualifier("playerConnectionController") PlayerConnectionController connectionService,
             PlayerFriendInvitationController invitationService,
             @Qualifier("playerAccountController") PlayerAccountController accountOperations,
@@ -117,8 +117,8 @@ public class BaseTestSpringConfiguration implements TestSpringConfiguration {
             IntegrationGoalOperationsFactory goalOperationsFactory,
             PlayerNotificationController notificationServiceController,
             PlayerFeedController feedServiceController,
-            PlayerPasswordServiceController resetServiceController,
-            PlayerEmailServiceController emailServiceController,
+            PlayerPasswordController resetServiceController,
+            PlayerEmailController emailServiceController,
             PlayerTagController tagServiceController) {
             ClembleCasinoRegistrationOperations registrationOperations = new IntegrationClembleCasinoRegistrationOperations(
                 host,

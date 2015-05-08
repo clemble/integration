@@ -1,7 +1,7 @@
 package com.clemble.casino.integration.player;
 
 import com.clemble.casino.player.service.PlayerImageService;
-import com.clemble.casino.server.profile.controller.PlayerImageServiceController;
+import com.clemble.casino.server.profile.controller.PlayerImageController;
 
 /**
  * Created by mavarazy on 7/26/14.
@@ -10,9 +10,9 @@ import com.clemble.casino.server.profile.controller.PlayerImageServiceController
 public class IntegrationPlayerImageService implements PlayerImageService {
 
     final private String player;
-    final private PlayerImageServiceController imageService;
+    final private PlayerImageController imageService;
 
-    public IntegrationPlayerImageService(String player, PlayerImageServiceController imageService) {
+    public IntegrationPlayerImageService(String player, PlayerImageController imageService) {
         this.player = player;
         this.imageService = imageService;
     }

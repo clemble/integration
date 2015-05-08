@@ -1,7 +1,7 @@
 package com.clemble.casino.integration.player;
 
 import com.clemble.casino.player.service.PlayerEmailService;
-import com.clemble.casino.server.email.controller.PlayerEmailServiceController;
+import com.clemble.casino.server.email.controller.PlayerEmailController;
 import org.springframework.mock.web.MockHttpServletResponse;
 
 import java.io.IOException;
@@ -12,9 +12,9 @@ import java.io.IOException;
 public class IntegrationPlayerEmailService implements PlayerEmailService {
 
     final private String player;
-    final private PlayerEmailServiceController emailServiceController;
+    final private PlayerEmailController emailServiceController;
 
-    public IntegrationPlayerEmailService(String player, PlayerEmailServiceController emailServiceController) {
+    public IntegrationPlayerEmailService(String player, PlayerEmailController emailServiceController) {
         this.player = player;
         this.emailServiceController = emailServiceController;
     }

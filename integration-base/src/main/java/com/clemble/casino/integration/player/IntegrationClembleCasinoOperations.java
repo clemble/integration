@@ -11,14 +11,14 @@ import com.clemble.casino.player.service.*;
 import com.clemble.casino.registration.service.PlayerPasswordService;
 import com.clemble.casino.server.connection.controller.PlayerConnectionController;
 import com.clemble.casino.server.connection.controller.PlayerFriendInvitationController;
-import com.clemble.casino.server.email.controller.PlayerEmailServiceController;
+import com.clemble.casino.server.email.controller.PlayerEmailController;
 import com.clemble.casino.server.notification.controller.PlayerNotificationController;
 import com.clemble.casino.server.payment.controller.PaymentTransactionController;
 import com.clemble.casino.server.payment.controller.PlayerAccountController;
 import com.clemble.casino.server.post.controller.PlayerFeedController;
-import com.clemble.casino.server.profile.controller.PlayerImageServiceController;
+import com.clemble.casino.server.profile.controller.PlayerImageController;
 import com.clemble.casino.server.profile.controller.PlayerProfileController;
-import com.clemble.casino.server.registration.controller.PlayerPasswordServiceController;
+import com.clemble.casino.server.registration.controller.PlayerPasswordController;
 import com.clemble.casino.tag.service.PlayerTagService;
 import com.clemble.server.tag.controller.PlayerTagController;
 import org.springframework.web.client.RestTemplate;
@@ -57,7 +57,7 @@ public class IntegrationClembleCasinoOperations implements ClembleCasinoOperatio
         final ObjectMapper objectMapper,
         final String player,
         final PlayerProfileController playerProfileService,
-        final PlayerImageServiceController imageService,
+        final PlayerImageController imageService,
         final PlayerConnectionController playerConnectionService,
         final PlayerFriendInvitationController invitationService,
         final PlayerAccountController accountServiceController,
@@ -66,8 +66,8 @@ public class IntegrationClembleCasinoOperations implements ClembleCasinoOperatio
         final GoalOperations goalOperations,
         final PlayerNotificationController notificationServiceController,
         final PlayerFeedController feedServiceController,
-        final PlayerPasswordServiceController passwordResetServiceController,
-        final PlayerEmailServiceController emailService,
+        final PlayerPasswordController passwordResetServiceController,
+        final PlayerEmailController emailService,
         final PlayerTagController tagServiceController
     ) {
         this.player = player;

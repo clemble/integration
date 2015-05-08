@@ -4,7 +4,7 @@ import com.clemble.casino.client.goal.GoalOperations;
 import com.clemble.casino.goal.configuration.controller.GoalConfigurationController;
 import com.clemble.casino.goal.controller.GoalActionController;
 import com.clemble.casino.goal.controller.GoalRecordController;
-import com.clemble.casino.goal.controller.GoalVictoryServiceController;
+import com.clemble.casino.goal.controller.GoalVictoryController;
 import com.clemble.casino.goal.lifecycle.configuration.service.GoalConfigurationService;
 import com.clemble.casino.goal.construction.controller.GoalConstructionController;
 import com.clemble.casino.goal.construction.controller.GoalInitiationController;
@@ -36,7 +36,7 @@ public class IntegrationGoalOperations implements GoalOperations {
         GoalConstructionController constructionService,
         GoalActionController actionService,
         GoalRecordController recordService,
-        GoalVictoryServiceController victoryService) {
+        GoalVictoryController victoryService) {
         this.recordService = new IntegrationGoalRecordService(player, recordService);
         this.configurationService = new IntegrationGoalConfigurationService(player, configurationService);
         this.suggestionService = new IntegrationGoalSuggestionService(player, suggestionService);

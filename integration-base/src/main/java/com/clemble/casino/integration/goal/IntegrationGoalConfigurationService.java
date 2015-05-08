@@ -23,8 +23,8 @@ public class IntegrationGoalConfigurationService implements GoalConfigurationSer
     }
 
     @Override
-    public GoalConfigurationChoices getChoises() {
-        return configurationService.getChoises();
+    public GoalConfigurationChoices getChoices() {
+        return configurationService.getChoices();
     }
 
     @Override

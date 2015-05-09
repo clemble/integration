@@ -1,7 +1,7 @@
 package com.clemble.casino.integration.goal;
 
 import com.clemble.casino.goal.controller.GoalVictoryController;
-import com.clemble.casino.goal.lifecycle.management.GoalVictory;
+import com.clemble.casino.goal.lifecycle.management.GoalState;
 import com.clemble.casino.goal.lifecycle.management.service.GoalVictoryService;
 
 import java.util.List;
@@ -20,12 +20,12 @@ public class IntegrationGoalVictoryService implements GoalVictoryService {
     }
 
     @Override
-    public List<GoalVictory> listMy() {
+    public List<GoalState> listMy() {
         return victoryService.listMy(player);
     }
 
     @Override
-    public List<GoalVictory> list(String player) {
+    public List<GoalState> list(String player) {
         return victoryService.list(player);
     }
 

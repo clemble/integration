@@ -4,6 +4,7 @@ import com.clemble.casino.client.ClembleCasinoOperations;
 import com.clemble.casino.goal.event.action.GoalReachedAction;
 import com.clemble.casino.goal.lifecycle.construction.GoalConstruction;
 import com.clemble.casino.goal.lifecycle.construction.GoalConstructionRequest;
+import com.clemble.casino.goal.lifecycle.management.GoalState;
 import com.clemble.casino.goal.lifecycle.management.event.GoalEndedEvent;
 import com.clemble.casino.integration.ClembleIntegrationTest;
 import com.clemble.casino.integration.game.construction.PlayerScenarios;
@@ -40,7 +41,8 @@ public class GoalVictoryITest {
         A.goalOperations().actionService().process(goalKey, new GoalReachedAction("Win bitch"));
         // Step 6. Waiting for goal to completes
         AsyncUtils.verify(() -> {
-                Collection<EventRecord> events = A.goalOperations().recordService().get(goalKey).getEventRecords();
+                GoalState state = A.goalOperations().actionService().getState(goalKey);
+                Collection<EventRecord> events = state.getEventRecords();
                 for (EventRecord event : events) {
                     if (event.getEvent() instanceof GoalEndedEvent)
                         return true;

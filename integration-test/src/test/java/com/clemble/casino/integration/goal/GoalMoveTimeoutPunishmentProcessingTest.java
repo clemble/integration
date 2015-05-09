@@ -105,7 +105,7 @@ public class GoalMoveTimeoutPunishmentProcessingTest {
         GoalConstruction AC = A.goalOperations().constructionService().construct(new GoalConstructionRequest(LOOSE_PUNISHMENT, "Test loose timeout", "UTC"));
         // Step 3. Checking AC
         Outcome expected = new PlayerLostOutcome(A.getPlayer());
-        boolean check = AsyncUtils.check(() -> expected.equals(A.goalOperations().recordService().get(AC.getGoalKey()).getOutcome()));
+        boolean check = AsyncUtils.check(() -> expected.equals(A.goalOperations().actionService().getState(AC.getGoalKey()).getOutcome()));
         Assert.assertTrue(check);
     }
 
@@ -121,7 +121,7 @@ public class GoalMoveTimeoutPunishmentProcessingTest {
         Assert.assertTrue(checkPenalized);
         // Step 5. Checking loosing after money expires
         Outcome expected = new PlayerLostOutcome(A.getPlayer());
-        boolean checkLoose = AsyncUtils.check(() -> expected.equals(A.goalOperations().recordService().get(AC.getGoalKey()).getOutcome()));
+        boolean checkLoose = AsyncUtils.check(() -> expected.equals(A.goalOperations().actionService().getState(AC.getGoalKey()).getOutcome()));
         Assert.assertTrue(checkLoose);
     }
 

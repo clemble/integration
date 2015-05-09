@@ -10,9 +10,11 @@ import com.clemble.casino.goal.lifecycle.configuration.rule.reminder.NoReminderR
 import com.clemble.casino.goal.lifecycle.configuration.rule.share.ShareRule;
 import com.clemble.casino.goal.lifecycle.construction.GoalConstruction;
 import com.clemble.casino.goal.lifecycle.construction.GoalConstructionRequest;
+import com.clemble.casino.goal.lifecycle.management.GoalState;
 import com.clemble.casino.goal.lifecycle.management.event.GoalEndedEvent;
 import com.clemble.casino.integration.ClembleIntegrationTest;
 import com.clemble.casino.integration.game.construction.PlayerScenarios;
+import com.clemble.casino.integration.utils.AsyncUtils;
 import com.clemble.casino.lifecycle.configuration.rule.bet.LimitedBetRule;
 import com.clemble.casino.lifecycle.configuration.rule.breach.LooseBreachPunishment;
 import com.clemble.casino.lifecycle.configuration.rule.timeout.MoveTimeoutCalculator;
@@ -68,7 +70,7 @@ public class GoalRecordITest {
         AsyncCompletionUtils.check(new Check(){
             @Override
             public boolean check() {
-                Collection<EventRecord> events = A.goalOperations().recordService().get(goalKey).getEventRecords();
+                Collection<EventRecord> events = A.goalOperations().actionService().getState(goalKey).getEventRecords();
                 for(EventRecord event: events) {
                     if (event.getEvent() instanceof GoalEndedEvent)
                         return true;
@@ -97,18 +99,16 @@ public class GoalRecordITest {
         // Step 5. Performing simple action
         A.goalOperations().actionService().process(goalKey, new GoalReachedAction("Win bitch"));
         // Step 6. Waiting for goal to completes
-        AsyncCompletionUtils.check(new Check(){
-            @Override
-            public boolean check() {
-                Collection<EventRecord> events = A.goalOperations().recordService().get(goalKey).getEventRecords();
-                for(EventRecord event: events) {
-                    if (event.getEvent() instanceof GoalEndedEvent)
-                        return true;
-                }
-                return false;
+        AsyncUtils.verify(() -> {
+            GoalState state = A.goalOperations().actionService().getState(goalKey);
+            Collection<EventRecord> events = state.getEventRecords();
+            for (EventRecord event : events) {
+                if (event.getEvent() instanceof GoalEndedEvent)
+                    return true;
             }
-        }, 30_000);
-        Assert.assertEquals(A.goalOperations().recordService().get(goalKey).getOutcome(), new PlayerWonOutcome(A.getPlayer()));
+            return false;
+        });
+        Assert.assertEquals(A.goalOperations().actionService().getState(goalKey).getOutcome(), new PlayerWonOutcome(A.getPlayer()));
     }
 
 }

@@ -3,7 +3,6 @@ package com.clemble.casino.integration.goal;
 import com.clemble.casino.client.goal.GoalOperations;
 import com.clemble.casino.goal.configuration.controller.GoalConfigurationController;
 import com.clemble.casino.goal.controller.GoalActionController;
-import com.clemble.casino.goal.controller.GoalRecordController;
 import com.clemble.casino.goal.controller.GoalVictoryController;
 import com.clemble.casino.goal.lifecycle.configuration.service.GoalConfigurationService;
 import com.clemble.casino.goal.construction.controller.GoalConstructionController;
@@ -11,7 +10,6 @@ import com.clemble.casino.goal.lifecycle.construction.service.GoalConstructionSe
 import com.clemble.casino.goal.lifecycle.construction.service.GoalSuggestionService;
 import com.clemble.casino.goal.lifecycle.management.service.GoalActionService;
 import com.clemble.casino.goal.lifecycle.management.service.GoalVictoryService;
-import com.clemble.casino.goal.lifecycle.record.service.GoalRecordService;
 import com.clemble.casino.goal.suggestion.controller.GoalSuggestionController;
 
 /**
@@ -22,7 +20,6 @@ public class IntegrationGoalOperations implements GoalOperations {
     final private GoalConfigurationService configurationService;
     final private GoalConstructionService constructionService;
     final private GoalSuggestionService suggestionService;
-    final private GoalRecordService recordService;
     final private GoalActionService actionService;
     final private GoalVictoryService victoryService;
 
@@ -31,9 +28,7 @@ public class IntegrationGoalOperations implements GoalOperations {
         GoalSuggestionController suggestionService,
         GoalConstructionController constructionService,
         GoalActionController actionService,
-        GoalRecordController recordService,
         GoalVictoryController victoryService) {
-        this.recordService = new IntegrationGoalRecordService(player, recordService);
         this.configurationService = new IntegrationGoalConfigurationService(player, configurationService);
         this.suggestionService = new IntegrationGoalSuggestionService(player, suggestionService);
         this.constructionService = new IntegrationGoalConstructionService(player, constructionService);
@@ -59,11 +54,6 @@ public class IntegrationGoalOperations implements GoalOperations {
     @Override
     public GoalActionService actionService() {
         return actionService;
-    }
-
-    @Override
-    public GoalRecordService recordService() {
-        return recordService;
     }
 
     @Override

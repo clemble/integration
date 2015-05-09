@@ -6,7 +6,6 @@ import com.clemble.casino.goal.event.action.GoalStatusUpdateAction;
 import com.clemble.casino.goal.lifecycle.configuration.GoalConfiguration;
 import com.clemble.casino.goal.lifecycle.construction.GoalConstruction;
 import com.clemble.casino.goal.lifecycle.construction.GoalConstructionRequest;
-import com.clemble.casino.goal.lifecycle.initiation.GoalInitiation;
 import com.clemble.casino.integration.ClembleIntegrationTest;
 import com.clemble.casino.integration.game.construction.PlayerScenarios;
 import com.clemble.casino.integration.utils.AsyncUtils;
@@ -36,9 +35,6 @@ public class GoalDeadlineITest {
         final GoalConstruction construction = gA.constructionService().construct(new GoalConstructionRequest(configuration, "Test deadline", "UTC"));
         final String goalKey = construction.getGoalKey();
         // Step 2.1. Checking goal initiated
-        Assert.assertTrue(AsyncUtils.checkNotNull(() -> gA.initiationService().get(goalKey)));
-        // Step 2.2. Confirming initiation to trigger goal
-        GoalInitiation initiation = gA.initiationService().confirm(construction.getGoalKey());
         // Step 3. Checking goal has deadline in timeout
         Assert.assertTrue(AsyncUtils.checkNotNull(() -> gA.actionService().getState(goalKey)));
         // Step 3.1. Extracting deadline

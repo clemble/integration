@@ -105,7 +105,6 @@ public class GoalEmailNotificationTest {
         final GoalConstruction constructionA = A.goalOperations().constructionService().construct(requestA);
         // Step 4. Checking Requests
         AsyncUtils.check(() ->
-            A.goalOperations().initiationService().get(constructionA.getGoalKey()) != null &&
             A.goalOperations().actionService().getState(constructionA.getGoalKey()) != null
         );
         B.goalOperations().actionService().process(constructionA.getGoalKey(), new BetAction(100));

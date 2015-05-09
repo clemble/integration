@@ -8,7 +8,6 @@ import com.clemble.casino.goal.lifecycle.construction.GoalConstructionRequest;
 import com.clemble.casino.integration.ClembleIntegrationTest;
 import com.clemble.casino.integration.game.construction.PlayerScenarios;
 import com.clemble.casino.integration.utils.AsyncUtils;
-import com.clemble.casino.lifecycle.initiation.InitiationState;
 import com.clemble.test.concurrent.AsyncCompletionUtils;
 import com.clemble.test.concurrent.Check;
 import com.clemble.test.random.ObjectGenerator;
@@ -38,12 +37,6 @@ public class GoalStatusUpdateITest {
         final GoalConstruction construction = A.goalOperations().constructionService().construct(goalRequest);
         final String goalKey = construction.getGoalKey();
         // Step 3. Checking construction
-        AsyncCompletionUtils.check(new Check() {
-            @Override
-            public boolean check() {
-                return A.goalOperations().initiationService().get(goalKey).getState() == InitiationState.initiated;
-            }
-        }, 30_000);
         final String newStatus = ObjectGenerator.generate(String.class);
         // Step 4. Checking goal started
         boolean goalStarted = AsyncUtils.checkNotNull(() -> A.goalOperations().actionService().getState(goalKey));

@@ -8,12 +8,7 @@ import com.clemble.casino.goal.lifecycle.management.event.GoalEndedEvent;
 import com.clemble.casino.integration.ClembleIntegrationTest;
 import com.clemble.casino.integration.game.construction.PlayerScenarios;
 import com.clemble.casino.integration.utils.AsyncUtils;
-import com.clemble.casino.lifecycle.initiation.InitiationState;
-import com.clemble.casino.lifecycle.management.outcome.PlayerWonOutcome;
 import com.clemble.casino.lifecycle.record.EventRecord;
-import com.clemble.test.concurrent.AsyncCompletionUtils;
-import com.clemble.test.concurrent.Check;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +34,6 @@ public class GoalVictoryITest {
         GoalConstructionRequest goalRequest = new GoalConstructionRequest(A.goalOperations().configurationService().getConfigurations().get(0), "Simple victory notification test", "UTC");
         final GoalConstruction construction = A.goalOperations().constructionService().construct(goalRequest);
         final String goalKey = construction.getGoalKey();
-        // Step 3. Checking construction
-        AsyncUtils.verify(() -> A.goalOperations().initiationService().get(goalKey).getState() == InitiationState.initiated);
         // Step 4. Checking goal started
         AsyncUtils.verify(() -> A.goalOperations().actionService().getState(goalKey) != null);
         // Step 5. Performing simple action

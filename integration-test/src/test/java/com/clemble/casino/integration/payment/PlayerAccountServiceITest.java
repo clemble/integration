@@ -36,7 +36,7 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ClembleIntegrationTest
-public class PlayerAccountOperationsITest {
+public class PlayerAccountServiceITest {
 
     @Autowired
     public PlayerScenarios playerOperations;

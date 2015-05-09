@@ -103,12 +103,9 @@ public class GoalPhoneNotificationTest {
         final GoalConstruction constructionA = A.goalOperations().constructionService().construct(requestA);
         // Step 4. Checking Requests
         AsyncUtils.check(() ->
-            A.goalOperations().initiationService().get(constructionA.getGoalKey()) != null &&
             A.goalOperations().actionService().getState(constructionA.getGoalKey()) != null
         );
         B.goalOperations().actionService().process(constructionA.getGoalKey(), new BetAction(100));
-        // Step 5. Starting goal A
-        A.goalOperations().initiationService().confirm(constructionA.getGoalKey());
         // Step 6. Checking value
         SystemPhoneSMSSendRequestEvent reminderNotification = (SystemPhoneSMSSendRequestEvent) systemEventAccumulator.waitFor(BSMSSelector);
         Assert.assertNotNull(reminderNotification);

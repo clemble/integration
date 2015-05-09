@@ -18,7 +18,6 @@ import com.clemble.casino.lifecycle.configuration.rule.breach.LooseBreachPunishm
 import com.clemble.casino.lifecycle.configuration.rule.timeout.MoveTimeoutCalculator;
 import com.clemble.casino.lifecycle.configuration.rule.timeout.TimeoutRule;
 import com.clemble.casino.lifecycle.configuration.rule.timeout.TotalTimeoutCalculator;
-import com.clemble.casino.lifecycle.initiation.InitiationState;
 import com.clemble.casino.lifecycle.management.outcome.PlayerWonOutcome;
 import com.clemble.casino.lifecycle.record.EventRecord;
 import com.clemble.casino.money.Currency;
@@ -65,12 +64,6 @@ public class GoalRecordITest {
         final GoalConstruction construction = A.goalOperations().constructionService().construct(goalRequest);
         final String goalKey = construction.getGoalKey();
         // Step 3. Checking construction
-        AsyncCompletionUtils.check(new Check(){
-            @Override
-            public boolean check() {
-                return A.goalOperations().initiationService().get(goalKey).getState() == InitiationState.initiated;
-            }
-        }, 30_000);
         // Step 4. Checking value
         AsyncCompletionUtils.check(new Check(){
             @Override
@@ -94,12 +87,6 @@ public class GoalRecordITest {
         final GoalConstruction construction = A.goalOperations().constructionService().construct(goalRequest);
         final String goalKey = construction.getGoalKey();
         // Step 3. Checking construction
-        AsyncCompletionUtils.check(new Check(){
-            @Override
-            public boolean check() {
-                return A.goalOperations().initiationService().get(goalKey).getState() == InitiationState.initiated;
-            }
-        }, 30_000);
         // Step 4. Checking goal started
         AsyncCompletionUtils.check(new Check(){
             @Override

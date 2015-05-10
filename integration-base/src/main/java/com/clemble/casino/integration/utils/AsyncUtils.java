@@ -2,6 +2,7 @@ package com.clemble.casino.integration.utils;
 
 import org.junit.Assert;
 import java.util.concurrent.Callable;
+import java.util.function.Supplier;
 
 /**
  * Created by mavarazy on 11/26/14.
@@ -12,37 +13,37 @@ public class AsyncUtils {
         throw new IllegalAccessError();
     }
 
-    public static void verify(Callable<Boolean> check) {
+    public static void verify(Supplier<Boolean> check) {
         Assert.assertTrue(check(check));
     }
 
-    public static <T> void verifyNotNull(Callable<T> check) {
+    public static <T> void verifyNotNull(Supplier<T> check) {
         Assert.assertNotNull(checkNotNull(check));
     }
 
-    public static <T> void verifyEquals(Callable<T> A, Callable<T> B) throws Exception {
+    public static <T> void verifyEquals(Supplier<T> A, Supplier<T> B) {
         boolean check = check(() -> {
             try {
-                return A.call().equals(B.call());
+                return A.get().equals(B.get());
             } catch (Exception e) {
                 return false;
             }
         });
         if (!check) {
-            Assert.assertEquals(A.call(), B.call());
+            Assert.assertEquals(A.get(), B.get());
         }
     }
 
-    public static boolean check(Callable<Boolean> check) {
+    public static boolean check(Supplier<Boolean> check) {
         return check(check, 30_000);
     }
 
-    public static boolean check(Callable<Boolean> check, long checkTimeout) {
+    public static boolean check(Supplier<Boolean> check, long checkTimeout) {
         long timeout = System.currentTimeMillis() + checkTimeout;
         while(timeout > System.currentTimeMillis()) {
             boolean result = false;
                 try {
-                    result = check.call();
+                    result = check.get();
                 } catch (Throwable throwable) {
                 }
             if (result) {
@@ -57,10 +58,10 @@ public class AsyncUtils {
         return false;
     }
 
-    public static <T> boolean checkNotNull(Callable<T> f) {
+    public static <T> boolean checkNotNull(Supplier<T> f) {
         return check(() -> {
             try {
-                return f.call() != null;
+                return f.get() != null;
             } catch (Throwable throwable) {
                 return false;
             }

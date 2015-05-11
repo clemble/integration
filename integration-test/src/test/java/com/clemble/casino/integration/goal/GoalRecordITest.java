@@ -17,9 +17,7 @@ import com.clemble.casino.integration.game.construction.PlayerScenarios;
 import com.clemble.casino.integration.utils.AsyncUtils;
 import com.clemble.casino.lifecycle.configuration.rule.bet.LimitedBetRule;
 import com.clemble.casino.lifecycle.configuration.rule.breach.LooseBreachPunishment;
-import com.clemble.casino.lifecycle.configuration.rule.timeout.MoveTimeoutCalculator;
-import com.clemble.casino.lifecycle.configuration.rule.timeout.TimeoutRule;
-import com.clemble.casino.lifecycle.configuration.rule.timeout.TotalTimeoutCalculator;
+import com.clemble.casino.lifecycle.configuration.rule.timeout.*;
 import com.clemble.casino.lifecycle.management.outcome.PlayerWonOutcome;
 import com.clemble.casino.lifecycle.record.EventRecord;
 import com.clemble.casino.money.Currency;
@@ -42,14 +40,19 @@ import java.util.concurrent.TimeUnit;
 @ClembleIntegrationTest
 public class GoalRecordITest {
 
+    @Test
+    public void testName() throws Exception {
+
+    }
+
     GoalConfiguration CONFIGURATION = new GoalConfiguration(
         "basic",
         "Basic",
         new Bet(Money.create(Currency.point, 500), Money.create(Currency.point, 50)),
         new BasicReminderRule(TimeUnit.HOURS.toMillis(4)),
         new BasicReminderRule(TimeUnit.HOURS.toMillis(2)),
-        new TimeoutRule(LooseBreachPunishment.getInstance(), new MoveTimeoutCalculator(TimeUnit.SECONDS.toMillis(1))),
-        new TimeoutRule(LooseBreachPunishment.getInstance(), new TotalTimeoutCalculator(TimeUnit.SECONDS.toMillis(2))),
+        new MoveTimeoutRule(LooseBreachPunishment.getInstance(), new MoveTimeoutCalculatorByLimit(TimeUnit.SECONDS.toMillis(1))),
+        new TotalTimeoutRule(LooseBreachPunishment.getInstance(), new TotalTimeoutCalculatorByLimit(TimeUnit.SECONDS.toMillis(2))),
         new GoalRoleConfiguration(3, LimitedBetRule.create(50, 100), 50, NoReminderRule.INSTANCE, NoReminderRule.INSTANCE),
         ShareRule.EMPTY
     );

@@ -38,7 +38,7 @@ public class GoalDeadlineITest {
         // Step 3. Checking goal has deadline in timeout
         Assert.assertTrue(AsyncUtils.checkNotNull(() -> gA.actionService().getState(goalKey)));
         // Step 3.1. Extracting deadline
-        long deadline = gA.actionService().getState(goalKey).getContext().getPlayerContext(A.getPlayer()).getClock().getDeadline().getMillis();
+        long deadline = gA.actionService().getState(goalKey).getDeadline().getMillis();
         Assert.assertNotEquals(deadline, 0L);
     }
 
@@ -54,12 +54,12 @@ public class GoalDeadlineITest {
         // Step 3. Checking goal has deadline in timeout
         Assert.assertTrue(AsyncUtils.checkNotNull(() -> gA.actionService().getState(goalKey)));
         // Step 3.1. Extracting deadline
-        long clockDeadline = gA.actionService().getState(goalKey).getContext().getPlayerContext(A.getPlayer()).getClock().getDeadline().getMillis();
+        long clockDeadline = gA.actionService().getState(goalKey).getDeadline().getMillis();
         long goalDeadline = gA.actionService().getState(goalKey).getDeadline().getMillis();
         Assert.assertNotEquals(clockDeadline, 0L);
         // Step 3.2. Updating status
         gA.actionService().process(goalKey, new GoalStatusUpdateAction("New status"));
-        long newClockDeadline = gA.actionService().getState(goalKey).getContext().getPlayerContext(A.getPlayer()).getClock().getDeadline().getMillis();
+        long newClockDeadline = gA.actionService().getState(goalKey).getDeadline().getMillis();
         long newGoalDeadline = gA.actionService().getState(goalKey).getDeadline().getMillis();
         // Step 4. Check deadline remained same
         Assert.assertEquals(goalDeadline, newGoalDeadline);

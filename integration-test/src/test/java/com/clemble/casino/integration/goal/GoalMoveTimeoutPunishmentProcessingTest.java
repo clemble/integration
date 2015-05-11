@@ -16,14 +16,11 @@ import com.clemble.casino.lifecycle.configuration.rule.bet.LimitedBetRule;
 import com.clemble.casino.lifecycle.configuration.rule.breach.CountdownBreachPunishment;
 import com.clemble.casino.lifecycle.configuration.rule.breach.LooseBreachPunishment;
 import com.clemble.casino.lifecycle.configuration.rule.breach.PenaltyBreachPunishment;
-import com.clemble.casino.lifecycle.configuration.rule.timeout.MoveTimeoutCalculator;
-import com.clemble.casino.lifecycle.configuration.rule.timeout.TimeoutRule;
-import com.clemble.casino.lifecycle.configuration.rule.timeout.TotalTimeoutCalculator;
+import com.clemble.casino.lifecycle.configuration.rule.timeout.*;
 import com.clemble.casino.lifecycle.management.outcome.Outcome;
 import com.clemble.casino.lifecycle.management.outcome.PlayerLostOutcome;
 import com.clemble.casino.money.Currency;
 import com.clemble.casino.money.Money;
-import com.clemble.casino.payment.Bank;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,14 +36,19 @@ import java.util.concurrent.TimeUnit;
 @ClembleIntegrationTest
 public class GoalMoveTimeoutPunishmentProcessingTest {
 
+    @Test
+    public void testName() throws Exception {
+
+    }
+
     final private GoalConfiguration LOOSE_PUNISHMENT = new GoalConfiguration(
         "move:loose:punishment",
         "move:loose:punishment",
         new Bet(Money.create(Currency.point, 100), Money.create(Currency.point, 50)),
         new BasicReminderRule(TimeUnit.SECONDS.toMillis(1)),
         NoReminderRule.INSTANCE,
-        new TimeoutRule(LooseBreachPunishment.getInstance(), new MoveTimeoutCalculator(TimeUnit.SECONDS.toMillis(3))),
-        new TimeoutRule(LooseBreachPunishment.getInstance(), new TotalTimeoutCalculator(TimeUnit.HOURS.toMillis(3))),
+        new MoveTimeoutRule(LooseBreachPunishment.getInstance(), new MoveTimeoutCalculatorByLimit(TimeUnit.SECONDS.toMillis(3))),
+        new TotalTimeoutRule(LooseBreachPunishment.getInstance(), new TotalTimeoutCalculatorByLimit(TimeUnit.HOURS.toMillis(3))),
         new GoalRoleConfiguration(
             3,
             LimitedBetRule.create(50, 100),
@@ -63,8 +65,8 @@ public class GoalMoveTimeoutPunishmentProcessingTest {
         new Bet(Money.create(Currency.point, 30), Money.create(Currency.point, 20)),
         new BasicReminderRule(TimeUnit.SECONDS.toMillis(1)),
         NoReminderRule.INSTANCE,
-        new TimeoutRule(new PenaltyBreachPunishment(Money.create(Currency.point, 10)), new MoveTimeoutCalculator(TimeUnit.SECONDS.toMillis(3))),
-        new TimeoutRule(new PenaltyBreachPunishment(Money.create(Currency.point, 10)), new TotalTimeoutCalculator(TimeUnit.HOURS.toMillis(3))),
+        new MoveTimeoutRule(new PenaltyBreachPunishment(Money.create(Currency.point, 10)), new MoveTimeoutCalculatorByLimit(TimeUnit.SECONDS.toMillis(3))),
+        new TotalTimeoutRule(new PenaltyBreachPunishment(Money.create(Currency.point, 10)), new TotalTimeoutCalculatorByLimit(TimeUnit.HOURS.toMillis(3))),
         new GoalRoleConfiguration(
             3,
             LimitedBetRule.create(50, 100),
@@ -81,8 +83,8 @@ public class GoalMoveTimeoutPunishmentProcessingTest {
         new Bet(Money.create(Currency.point, 100), Money.create(Currency.point, 50)),
         new BasicReminderRule(TimeUnit.SECONDS.toMillis(1)),
         NoReminderRule.INSTANCE,
-        new TimeoutRule(new CountdownBreachPunishment(Money.create(Currency.point, 10), 100), new MoveTimeoutCalculator(TimeUnit.SECONDS.toMillis(1))),
-        new TimeoutRule(new CountdownBreachPunishment(Money.create(Currency.point, 10), 100), new TotalTimeoutCalculator(TimeUnit.HOURS.toMillis(3))),
+        new MoveTimeoutRule(new CountdownBreachPunishment(Money.create(Currency.point, 10), 100), new MoveTimeoutCalculatorByLimit(TimeUnit.SECONDS.toMillis(1))),
+        new TotalTimeoutRule(new CountdownBreachPunishment(Money.create(Currency.point, 10), 100), new TotalTimeoutCalculatorByLimit(TimeUnit.HOURS.toMillis(3))),
         new GoalRoleConfiguration(
             3,
             LimitedBetRule.create(50, 100),

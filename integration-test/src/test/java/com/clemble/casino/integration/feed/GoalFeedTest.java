@@ -17,9 +17,7 @@ import com.clemble.casino.integration.game.construction.PlayerScenarios;
 import com.clemble.casino.integration.utils.AsyncUtils;
 import com.clemble.casino.lifecycle.configuration.rule.bet.LimitedBetRule;
 import com.clemble.casino.lifecycle.configuration.rule.breach.LooseBreachPunishment;
-import com.clemble.casino.lifecycle.configuration.rule.timeout.MoveTimeoutCalculator;
-import com.clemble.casino.lifecycle.configuration.rule.timeout.TimeoutRule;
-import com.clemble.casino.lifecycle.configuration.rule.timeout.TotalTimeoutCalculator;
+import com.clemble.casino.lifecycle.configuration.rule.timeout.*;
 import com.clemble.casino.lifecycle.management.event.action.bet.BetAction;
 import com.clemble.casino.money.Currency;
 import com.clemble.casino.money.Money;
@@ -151,8 +149,8 @@ public class GoalFeedTest {
         new Bet(Money.create(Currency.point, 100), Money.create(Currency.point, 50)),
         NoReminderRule.INSTANCE,
         NoReminderRule.INSTANCE,
-        new TimeoutRule(LooseBreachPunishment.getInstance(), new MoveTimeoutCalculator(TimeUnit.SECONDS.toMillis(2))),
-        new TimeoutRule(LooseBreachPunishment.getInstance(), new TotalTimeoutCalculator(TimeUnit.HOURS.toMillis(3))),
+        new MoveTimeoutRule(LooseBreachPunishment.getInstance(), new MoveTimeoutCalculatorByLimit(TimeUnit.SECONDS.toMillis(2))),
+        new TotalTimeoutRule(LooseBreachPunishment.getInstance(), new TotalTimeoutCalculatorByLimit(TimeUnit.HOURS.toMillis(3))),
         new GoalRoleConfiguration(
             0,
             LimitedBetRule.create(50, 100),

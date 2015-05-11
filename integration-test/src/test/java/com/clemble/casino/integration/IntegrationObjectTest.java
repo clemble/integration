@@ -21,7 +21,6 @@ import com.clemble.casino.notification.PlayerNotification;
 import com.clemble.casino.payment.*;
 import com.clemble.casino.player.event.PlayerInvitationAcceptedAction;
 import com.clemble.casino.player.event.PlayerInvitationAction;
-import com.clemble.casino.goal.lifecycle.management.GoalContext;
 import com.clemble.casino.goal.lifecycle.management.GoalPlayerContext;
 import com.clemble.casino.event.action.PlayerExpectedAction;
 import com.clemble.casino.event.Event;
@@ -112,13 +111,6 @@ public class IntegrationObjectTest {
         ObjectGenerator.register(SortedSet.class, new AbstractValueGenerator<SortedSet>() {
             public SortedSet generate() {
                 return new TreeSet();
-            }
-        });
-        ObjectGenerator.register(GoalContext.class, new AbstractValueGenerator<GoalContext>() {
-            @Override
-            public GoalContext generate() {
-                List<GoalPlayerContext> playerContexts = Collections.emptyList();
-                return new GoalContext(null, playerContexts);
             }
         });
         register(PlayerInvitationAction.class, new AbstractValueGenerator<PlayerInvitationAction>() {

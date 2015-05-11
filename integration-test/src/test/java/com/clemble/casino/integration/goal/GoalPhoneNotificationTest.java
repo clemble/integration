@@ -15,6 +15,7 @@ import com.clemble.casino.goal.lifecycle.construction.GoalConstruction;
 import com.clemble.casino.goal.lifecycle.construction.GoalConstructionRequest;
 import com.clemble.casino.integration.ClembleIntegrationTest;
 import com.clemble.casino.integration.event.EventAccumulator;
+import com.clemble.casino.integration.event.SystemEventAccumulator;
 import com.clemble.casino.integration.game.construction.PlayerScenarios;
 import com.clemble.casino.integration.utils.AsyncUtils;
 import com.clemble.casino.lifecycle.configuration.rule.bet.LimitedBetRule;
@@ -31,6 +32,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.concurrent.TimeUnit;
@@ -47,7 +49,8 @@ public class GoalPhoneNotificationTest {
     public PlayerScenarios playerScenarios;
 
     @Autowired
-    public EventAccumulator<SystemEvent> systemEventAccumulator;
+    @Qualifier("systemPhoneSMSSendRequestEventAccumulator")
+    public SystemEventAccumulator<SystemPhoneSMSSendRequestEvent> systemPhoneSMSSendRequestEventAccumulator;
 
     final private GoalConfiguration CONFIGURATION = new GoalConfiguration(
         "phone:notification:test",
@@ -70,7 +73,7 @@ public class GoalPhoneNotificationTest {
     @Test
     public void testInitialized() {
         Assert.assertNotNull(playerScenarios);
-        Assert.assertNotNull(systemEventAccumulator);
+        Assert.assertNotNull(systemPhoneSMSSendRequestEventAccumulator);
     }
 
     @Test
@@ -84,7 +87,7 @@ public class GoalPhoneNotificationTest {
         GoalConstructionRequest requestA = new GoalConstructionRequest(CONFIGURATION, "Test sms notification", "UTC");
         A.goalOperations().constructionService().construct(requestA);
         // Step 3. Checking timeout sms notification received
-        SystemPhoneSMSSendRequestEvent reminderNotification = (SystemPhoneSMSSendRequestEvent) systemEventAccumulator.waitFor(smsSelector);
+        SystemPhoneSMSSendRequestEvent reminderNotification = (SystemPhoneSMSSendRequestEvent) systemPhoneSMSSendRequestEventAccumulator.waitFor(smsSelector);
         Assert.assertNotNull(reminderNotification);
         Assert.assertEquals(reminderNotification.getTemplate(), "goal_due");
     }
@@ -107,7 +110,7 @@ public class GoalPhoneNotificationTest {
         );
         B.goalOperations().actionService().process(constructionA.getGoalKey(), new BetAction(100));
         // Step 6. Checking value
-        SystemPhoneSMSSendRequestEvent reminderNotification = (SystemPhoneSMSSendRequestEvent) systemEventAccumulator.waitFor(BSMSSelector);
+        SystemPhoneSMSSendRequestEvent reminderNotification = (SystemPhoneSMSSendRequestEvent) systemPhoneSMSSendRequestEventAccumulator.waitFor(BSMSSelector);
         Assert.assertNotNull(reminderNotification);
         Assert.assertEquals(reminderNotification.getTemplate(), "goal_due");
     }

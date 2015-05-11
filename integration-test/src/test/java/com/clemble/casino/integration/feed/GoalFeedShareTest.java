@@ -12,6 +12,7 @@ import com.clemble.casino.goal.lifecycle.construction.GoalConstructionRequest;
 import com.clemble.casino.goal.post.GoalStartedPost;
 import com.clemble.casino.integration.ClembleIntegrationTest;
 import com.clemble.casino.integration.event.EventAccumulator;
+import com.clemble.casino.integration.event.SystemEventAccumulator;
 import com.clemble.casino.integration.game.construction.PlayerScenarios;
 import com.clemble.casino.integration.utils.AsyncUtils;
 import com.clemble.casino.player.Invitation;
@@ -22,6 +23,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
@@ -35,7 +37,8 @@ public class GoalFeedShareTest {
     public PlayerScenarios playerScenarios;
 
     @Autowired
-    public EventAccumulator<SystemEvent> systemEventAccumulator;
+    @Qualifier("systemSharePostEventAccumulator")
+    public SystemEventAccumulator<SystemSharePostEvent> systemSharePostEventAccumulator;
 
     @Test
     public void sharePost() {
@@ -58,7 +61,7 @@ public class GoalFeedShareTest {
         B.feedService().share(post.getKey(), SocialProvider.facebook);
         // Step 7. Checking notification was send
         EventSelector postSelector = EventSelectors.where(new EventTypeSelector(SystemSharePostEvent.class)).and(new PlayerEventSelector(B.getPlayer()));
-        SystemSharePostEvent shareEvent = systemEventAccumulator.waitFor(postSelector);
+        SystemSharePostEvent shareEvent = systemSharePostEventAccumulator.waitFor(postSelector);
         Assert.assertEquals(shareEvent.getPlayer(), B.getPlayer());
         Assert.assertEquals(shareEvent.getProviderId(), SocialProvider.facebook);
         Assert.assertEquals(shareEvent.getPost(), post);

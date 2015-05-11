@@ -7,15 +7,16 @@ import com.clemble.casino.goal.configuration.spring.GoalConfigurationSpringConfi
 import com.clemble.casino.goal.construction.spring.GoalConstructionSpringConfiguration;
 import com.clemble.casino.goal.spring.GoalManagementSpringConfiguration;
 import com.clemble.casino.goal.suggestion.spring.GoalSuggestionSpringConfiguration;
-import com.clemble.casino.integration.event.EventAccumulator;
+import com.clemble.casino.integration.event.SystemEventAccumulator;
 import com.clemble.casino.integration.game.construction.EmailScenarios;
 import com.clemble.casino.integration.player.IntegrationClembleCasinoRegistrationOperationsWrapper;
 import com.clemble.casino.schedule.spring.ScheduleSpringConfiguration;
 import com.clemble.casino.server.email.spring.PlayerEmailSpringConfiguration;
-import com.clemble.casino.server.event.SystemEvent;
+import com.clemble.casino.server.event.email.SystemEmailSendDirectRequestEvent;
+import com.clemble.casino.server.event.email.SystemEmailSendRequestEvent;
+import com.clemble.casino.server.event.phone.SystemPhoneSMSSendRequestEvent;
+import com.clemble.casino.server.event.share.SystemSharePostEvent;
 import com.clemble.casino.server.notification.spring.PlayerNotificationSpringConfiguration;
-import com.clemble.casino.server.player.notification.SystemEventListener;
-import com.clemble.casino.server.player.notification.SystemNotificationServiceListener;
 import com.clemble.casino.server.post.spring.PlayerFeedSpringConfiguration;
 import com.clemble.casino.server.spring.WebJsonSpringConfiguration;
 import com.clemble.casino.server.spring.common.PropertiesSpringConfiguration;
@@ -25,7 +26,6 @@ import com.clemble.casino.server.profile.spring.PlayerProfileSpringConfiguration
 import com.clemble.casino.server.social.spring.PlayerSocialSpringConfiguration;
 import com.clemble.casino.server.registration.spring.RegistrationSpringConfiguration;
 import com.clemble.server.tag.spring.TagSpringConfiguration;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -80,41 +80,29 @@ public class IntegrationTestSpringConfiguration implements TestSpringConfigurati
     public static class LocalTestConfiguration {
 
         @Bean
-        public EmailScenarios emailScenarios(EventAccumulator<SystemEvent> systemEventAccumulator) {
-            return new EmailScenarios(systemEventAccumulator);
+        public EmailScenarios emailScenarios(SystemEventAccumulator<SystemEmailSendDirectRequestEvent> systemEmailSendDirectRequestEventAccumulator) {
+            return new EmailScenarios(systemEmailSendDirectRequestEventAccumulator);
         }
-
-        @Autowired
-        public SystemNotificationServiceListener serviceListener;
 
         @Bean
-        public EventAccumulator<SystemEvent> systemEventAccumulator() {
-            JsonSubTypes annotation = SystemEvent.class.getDeclaredAnnotation(JsonSubTypes.class);
-            EventAccumulator<SystemEvent> eventAccumulator = new EventAccumulator<>();
-            for(JsonSubTypes.Type type: annotation.value()){
-                final String channel = type.name();
-                serviceListener.subscribe(new SystemEventListener<SystemEvent>() {
-
-                    @Override
-                    public void onEvent(SystemEvent event) {
-                        eventAccumulator.onEvent(event);
-                    }
-
-                    @Override
-                    public String getChannel() {
-                        return channel;
-                    }
-
-                    @Override
-                    public String getQueueName() {
-                        return "integration:" + channel;
-                    }
-
-                });
-            }
-            return eventAccumulator;
+        public SystemEventAccumulator<SystemEmailSendDirectRequestEvent> systemEmailSendDirectRequestEventAccumulator(){
+            return new SystemEventAccumulator<>(SystemEmailSendDirectRequestEvent.CHANNEL);
         }
 
+        @Bean
+        public SystemEventAccumulator<SystemEmailSendRequestEvent> systemEmailSendRequestEventAccumulator(){
+            return new SystemEventAccumulator<>(SystemEmailSendRequestEvent.CHANNEL);
+        }
+
+        @Bean
+        public SystemEventAccumulator<SystemPhoneSMSSendRequestEvent> systemPhoneSMSSendRequestEventAccumulator() {
+            return new SystemEventAccumulator(SystemPhoneSMSSendRequestEvent.CHANNEL);
+        }
+
+        @Bean
+        public SystemEventAccumulator<SystemSharePostEvent> systemSharePostEventAccumulator() {
+            return new SystemEventAccumulator<>(SystemSharePostEvent.CHANNEL);
+        }
     }
 
     @Configuration

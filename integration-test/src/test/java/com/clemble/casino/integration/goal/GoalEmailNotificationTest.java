@@ -15,6 +15,7 @@ import com.clemble.casino.goal.lifecycle.construction.GoalConstruction;
 import com.clemble.casino.goal.lifecycle.construction.GoalConstructionRequest;
 import com.clemble.casino.integration.ClembleIntegrationTest;
 import com.clemble.casino.integration.event.EventAccumulator;
+import com.clemble.casino.integration.event.SystemEventAccumulator;
 import com.clemble.casino.integration.game.construction.PlayerScenarios;
 import com.clemble.casino.integration.utils.AsyncUtils;
 import com.clemble.casino.lifecycle.configuration.rule.bet.LimitedBetRule;
@@ -31,6 +32,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.concurrent.TimeUnit;
@@ -46,7 +48,8 @@ public class GoalEmailNotificationTest {
     public PlayerScenarios playerScenarios;
 
     @Autowired
-    public EventAccumulator<SystemEvent> systemEventAccumulator;
+    @Qualifier("systemEmailSendRequestEventAccumulator")
+    public SystemEventAccumulator<SystemEmailSendRequestEvent> systemEmailSendRequestEventAccumulator;
 
     final private GoalConfiguration CONFIGURATION = new GoalConfiguration(
         "email:notification:test",
@@ -69,7 +72,7 @@ public class GoalEmailNotificationTest {
     @Test
     public void testInitialized() {
         Assert.assertNotNull(playerScenarios);
-        Assert.assertNotNull(systemEventAccumulator);
+        Assert.assertNotNull(systemEmailSendRequestEventAccumulator);
     }
 
     @Test
@@ -83,7 +86,7 @@ public class GoalEmailNotificationTest {
         GoalConstructionRequest requestA = new GoalConstructionRequest(CONFIGURATION, "Test email notification", "UTC");
         A.goalOperations().constructionService().construct(requestA);
         // Step 3. Checking timeout email notification received
-        SystemEmailSendRequestEvent reminderNotification = (SystemEmailSendRequestEvent) systemEventAccumulator.waitFor(emailSelector);
+        SystemEmailSendRequestEvent reminderNotification = (SystemEmailSendRequestEvent) systemEmailSendRequestEventAccumulator.waitFor(emailSelector);
         Assert.assertNotNull(reminderNotification);
         Assert.assertEquals(reminderNotification.getTemplate(), "goal_due");
     }
@@ -109,7 +112,7 @@ public class GoalEmailNotificationTest {
         );
         B.goalOperations().actionService().process(constructionA.getGoalKey(), new BetAction(100));
         // Step 5. Checking value
-        SystemEmailSendRequestEvent reminderNotification = (SystemEmailSendRequestEvent) systemEventAccumulator.waitFor(BEmailSelector);
+        SystemEmailSendRequestEvent reminderNotification = (SystemEmailSendRequestEvent) systemEmailSendRequestEventAccumulator.waitFor(BEmailSelector);
         Assert.assertNotNull(reminderNotification);
         Assert.assertEquals(reminderNotification.getTemplate(), "goal_due");
     }

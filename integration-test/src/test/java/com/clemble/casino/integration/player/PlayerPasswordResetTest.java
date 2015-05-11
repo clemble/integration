@@ -8,6 +8,7 @@ import com.clemble.casino.client.event.PlayerEventSelector;
 import com.clemble.casino.event.Event;
 import com.clemble.casino.integration.ClembleIntegrationTest;
 import com.clemble.casino.integration.event.EventAccumulator;
+import com.clemble.casino.integration.event.SystemEventAccumulator;
 import com.clemble.casino.integration.game.construction.EmailScenarios;
 import com.clemble.casino.integration.game.construction.PlayerScenarios;
 import com.clemble.casino.integration.spring.IntegrationTestSpringConfiguration;
@@ -44,8 +45,8 @@ public class PlayerPasswordResetTest {
     public EmailScenarios emailScenarios;
 
     @Autowired
-    @Qualifier("systemEventAccumulator")
-    public EventAccumulator<SystemEvent> systemEventAccumulator;
+    @Qualifier("systemEmailSendRequestEventAccumulator")
+    public SystemEventAccumulator<SystemEvent> systemEmailSendRequestEventAccumulator;
 
     @Test
     public void testPlayerPasswordChange(){
@@ -60,7 +61,7 @@ public class PlayerPasswordResetTest {
         // Step 3. Checking reset would update password
         String newPassword = RandomStringUtils.randomAlphanumeric(20);
         // Step 4. Fetching update event
-        SystemEmailSendRequestEvent emailRequest = systemEventAccumulator.waitFor(EventSelectors.
+        SystemEmailSendRequestEvent emailRequest = systemEmailSendRequestEventAccumulator.waitFor(EventSelectors.
             where(new EventTypeSelector(SystemEmailSendRequestEvent.class)).
             and(new PlayerEventSelector(A.getPlayer())).
             and(new EventSelector() {

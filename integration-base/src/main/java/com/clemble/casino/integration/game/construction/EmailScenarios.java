@@ -4,27 +4,24 @@ import com.clemble.casino.client.ClembleCasinoOperations;
 import com.clemble.casino.client.event.EventSelectors;
 import com.clemble.casino.client.event.EventTypeSelector;
 import com.clemble.casino.client.event.PlayerEventSelector;
-import com.clemble.casino.event.Event;
 import com.clemble.casino.integration.event.EventAccumulator;
-import com.clemble.casino.server.event.EventByTemplateSelector;
-import com.clemble.casino.server.event.SystemEvent;
+import com.clemble.casino.integration.event.SystemEventAccumulator;
 import com.clemble.casino.server.event.email.SystemEmailSendDirectRequestEvent;
-import com.clemble.casino.server.event.email.SystemEmailSendRequestEvent;
 
 /**
  * Created by mavarazy on 2/2/15.
  */
 public class EmailScenarios {
 
-    final private EventAccumulator eventAccumulator;
+    final private EventAccumulator systemEmailSendRequestEventAccumulator;
 
-    public EmailScenarios(EventAccumulator<SystemEvent> eventAccumulator) {
-        this.eventAccumulator = eventAccumulator;
+    public EmailScenarios(SystemEventAccumulator<SystemEmailSendDirectRequestEvent> systemEmailSendRequestEventAccumulator) {
+        this.systemEmailSendRequestEventAccumulator = systemEmailSendRequestEventAccumulator;
     }
 
     public void verify(ClembleCasinoOperations A) {
         // Step 1. Fetching event send request
-        SystemEmailSendDirectRequestEvent sendRequestEvent = (SystemEmailSendDirectRequestEvent) eventAccumulator.
+        SystemEmailSendDirectRequestEvent sendRequestEvent = (SystemEmailSendDirectRequestEvent) systemEmailSendRequestEventAccumulator.
             waitFor(EventSelectors.
                     where(new PlayerEventSelector(A.getPlayer())).
                     and(new EventTypeSelector(SystemEmailSendDirectRequestEvent.class))

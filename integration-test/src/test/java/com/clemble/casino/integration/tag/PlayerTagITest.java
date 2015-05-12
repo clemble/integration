@@ -10,6 +10,7 @@ import com.clemble.casino.integration.ClembleIntegrationTest;
 import com.clemble.casino.integration.game.construction.PlayerScenarios;
 import com.clemble.casino.integration.utils.AsyncUtils;
 import com.clemble.casino.tag.ClembleTag;
+import org.joda.time.DateTimeZone;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,7 +37,7 @@ public class PlayerTagITest {
         GoalOperations Agoal = A.goalOperations();
         // Step 3. Creating new goal with a tag
         GoalConfiguration configuration = Agoal.configurationService().getConfigurations().get(0);
-        GoalConstruction construction = Agoal.constructionService().construct(new GoalConstructionRequest(configuration, "#sport goal", "UTC"));
+        GoalConstruction construction = Agoal.constructionService().construct(new GoalConstructionRequest(configuration, "#sport goal", DateTimeZone.UTC));
         // Step 4. Checking goal started
         Assert.assertTrue(AsyncUtils.checkNotNull(() -> Agoal.actionService().getState(construction.getGoalKey())));
         // Step 5. Sending goal reached event

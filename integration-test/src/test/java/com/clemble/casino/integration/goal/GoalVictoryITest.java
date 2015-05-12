@@ -10,6 +10,7 @@ import com.clemble.casino.integration.ClembleIntegrationTest;
 import com.clemble.casino.integration.game.construction.PlayerScenarios;
 import com.clemble.casino.integration.utils.AsyncUtils;
 import com.clemble.casino.lifecycle.record.EventRecord;
+import org.joda.time.DateTimeZone;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class GoalVictoryITest {
         // Step 1. Creating player
         ClembleCasinoOperations A = playerScenarios.createPlayer();
         // Step 2. Creating GoalRequest
-        GoalConstructionRequest goalRequest = new GoalConstructionRequest(A.goalOperations().configurationService().getConfigurations().get(0), "Simple victory notification test", "UTC");
+        GoalConstructionRequest goalRequest = new GoalConstructionRequest(A.goalOperations().configurationService().getConfigurations().get(0), "Simple victory notification test", DateTimeZone.UTC);
         final GoalConstruction construction = A.goalOperations().constructionService().construct(goalRequest);
         final String goalKey = construction.getGoalKey();
         // Step 4. Checking goal started

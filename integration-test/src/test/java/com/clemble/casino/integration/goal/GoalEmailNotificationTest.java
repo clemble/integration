@@ -24,6 +24,7 @@ import com.clemble.casino.lifecycle.management.event.action.bet.BetAction;
 import com.clemble.casino.money.Currency;
 import com.clemble.casino.money.Money;
 import com.clemble.casino.server.event.email.SystemEmailSendRequestEvent;
+import org.joda.time.DateTimeZone;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -79,7 +80,7 @@ public class GoalEmailNotificationTest {
             where(new PlayerEventSelector(A.getPlayer())).
             and(new EventTypeSelector(SystemEmailSendRequestEvent.class));
         // Step 2. Create construction
-        GoalConstructionRequest requestA = new GoalConstructionRequest(CONFIGURATION, "Test email notification", "UTC");
+        GoalConstructionRequest requestA = new GoalConstructionRequest(CONFIGURATION, "Test email notification", DateTimeZone.UTC);
         A.goalOperations().constructionService().construct(requestA);
         // Step 3. Checking timeout email notification received
         SystemEmailSendRequestEvent reminderNotification = (SystemEmailSendRequestEvent) systemEmailSendRequestEventAccumulator.waitFor(emailSelector);
@@ -100,7 +101,7 @@ public class GoalEmailNotificationTest {
             where(new PlayerEventSelector(B.getPlayer())).
             and(new EventTypeSelector(SystemEmailSendRequestEvent.class));
         // Step 3. Creating requests
-        final GoalConstructionRequest requestA = new GoalConstructionRequest(CONFIGURATION, "Test email notification", "UTC");
+        final GoalConstructionRequest requestA = new GoalConstructionRequest(CONFIGURATION, "Test email notification", DateTimeZone.UTC);
         final GoalConstruction constructionA = A.goalOperations().constructionService().construct(requestA);
         // Step 4. Checking Requests
         AsyncUtils.check(() ->

@@ -24,6 +24,7 @@ import com.clemble.casino.money.Currency;
 import com.clemble.casino.money.Money;
 import com.clemble.test.concurrent.AsyncCompletionUtils;
 import com.clemble.test.concurrent.Check;
+import org.joda.time.DateTimeZone;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -65,7 +66,7 @@ public class GoalRecordITest {
         // Step 1. Creating player
         ClembleCasinoOperations A = playerScenarios.createPlayer();
         // Step 2. Creating GoalRequest
-        GoalConstructionRequest goalRequest = new GoalConstructionRequest(CONFIGURATION, "Simple test", "UTC");
+        GoalConstructionRequest goalRequest = new GoalConstructionRequest(CONFIGURATION, "Simple test", DateTimeZone.UTC);
         final GoalConstruction construction = A.goalOperations().constructionService().construct(goalRequest);
         final String goalKey = construction.getGoalKey();
         // Step 3. Checking construction
@@ -88,7 +89,7 @@ public class GoalRecordITest {
         // Step 1. Creating player
         ClembleCasinoOperations A = playerScenarios.createPlayer();
         // Step 2. Creating GoalRequest
-        GoalConstructionRequest goalRequest = new GoalConstructionRequest(CONFIGURATION, "Simple test", "UTC");
+        GoalConstructionRequest goalRequest = new GoalConstructionRequest(CONFIGURATION, "Simple test", DateTimeZone.UTC);
         final GoalConstruction construction = A.goalOperations().constructionService().construct(goalRequest);
         final String goalKey = construction.getGoalKey();
         // Step 3. Checking construction

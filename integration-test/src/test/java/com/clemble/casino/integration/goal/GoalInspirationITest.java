@@ -12,6 +12,7 @@ import com.clemble.casino.integration.game.construction.PlayerScenarios;
 import com.clemble.casino.integration.utils.AsyncUtils;
 import com.clemble.casino.lifecycle.management.event.action.surrender.GiveUpAction;
 import com.clemble.casino.money.Currency;
+import org.joda.time.DateTimeZone;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ public class GoalInspirationITest {
         AsyncUtils.verify(() -> A.accountService().myAccount().getMoney(Currency.inspiration) == null);
         // Step 3. Specify a goal
         GoalConfiguration configuration = A.goalOperations().configurationService().getConfigurations().get(0);
-        GoalConstruction construction = A.goalOperations().constructionService().construct(new GoalConstructionRequest(configuration, "Test inspirations added", "UTC"));
+        GoalConstruction construction = A.goalOperations().constructionService().construct(new GoalConstructionRequest(configuration, "Test inspirations added", DateTimeZone.UTC));
         // Step 3.1. Checking goal already started
         AsyncUtils.verify(() -> A.goalOperations().actionService().getState(construction.getGoalKey()).getPhase() == GoalPhase.started);
         // Step 4. Finishing goal
@@ -57,7 +58,7 @@ public class GoalInspirationITest {
         ClembleCasinoOperations B = createPlayerWithInspirations();
         // Step 2. Specify a goal
         GoalConfiguration configuration = A.goalOperations().configurationService().getConfigurations().get(0);
-        GoalConstruction construction = A.goalOperations().constructionService().construct(new GoalConstructionRequest(configuration, "Test inspirations added", "UTC"));
+        GoalConstruction construction = A.goalOperations().constructionService().construct(new GoalConstructionRequest(configuration, "Test inspirations added", DateTimeZone.UTC));
         // Step 2.1. Checking goal already started
         AsyncUtils.verify(() -> A.goalOperations().actionService().getState(construction.getGoalKey()).getPhase() == GoalPhase.started);
         long inspirationsBefore = B.accountService().myAccount().getMoney(Currency.inspiration).getAmount();
@@ -72,7 +73,7 @@ public class GoalInspirationITest {
         ClembleCasinoOperations B = createPlayerWithInspirations();
         // Step 2. Specify a goal
         GoalConfiguration configuration = A.goalOperations().configurationService().getConfigurations().get(0);
-        GoalConstruction construction = A.goalOperations().constructionService().construct(new GoalConstructionRequest(configuration, "Test inspirations added", "UTC"));
+        GoalConstruction construction = A.goalOperations().constructionService().construct(new GoalConstructionRequest(configuration, "Test inspirations added", DateTimeZone.UTC));
         // Step 2.1. Checking goal already started
         AsyncUtils.verify(() -> A.goalOperations().actionService().getState(construction.getGoalKey()).getPhase() == GoalPhase.started);
         long inspirationsBefore = B.accountService().myAccount().getMoney(Currency.inspiration).getAmount();
@@ -91,7 +92,7 @@ public class GoalInspirationITest {
         ClembleCasinoOperations B = createPlayerWithInspirations();
         // Step 2. Specify a goal
         GoalConfiguration configuration = A.goalOperations().configurationService().getConfigurations().get(0);
-        GoalConstruction construction = A.goalOperations().constructionService().construct(new GoalConstructionRequest(configuration, "Test inspirations added", "UTC"));
+        GoalConstruction construction = A.goalOperations().constructionService().construct(new GoalConstructionRequest(configuration, "Test inspirations added", DateTimeZone.UTC));
         // Step 2.1. Checking goal already started
         AsyncUtils.verify(() -> A.goalOperations().actionService().getState(construction.getGoalKey()).getPhase() == GoalPhase.started);
         long inspirationsBefore = B.accountService().myAccount().getMoney(Currency.inspiration).getAmount();

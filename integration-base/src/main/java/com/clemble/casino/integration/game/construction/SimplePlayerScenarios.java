@@ -19,6 +19,7 @@ import com.clemble.casino.social.SocialAccessGrant;
 import com.clemble.casino.social.SocialConnectionData;
 import com.clemble.casino.registration.PlayerCredential;
 import com.clemble.casino.registration.PlayerRegistrationRequest;
+import org.joda.time.DateTimeZone;
 
 public class SimplePlayerScenarios implements PlayerScenarios {
 
@@ -37,7 +38,7 @@ public class SimplePlayerScenarios implements PlayerScenarios {
                 .setFirstName(RandomStringUtils.randomAlphabetic(10))
                 .setLastName(RandomStringUtils.randomAlphabetic(10))
                 .setNickName(RandomStringUtils.randomAlphabetic(10))
-                .setTimezone("UTC");
+                .setTimezone(DateTimeZone.UTC);
         return register(credential, playerProfile);
     }
 

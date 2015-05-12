@@ -21,6 +21,7 @@ import com.clemble.casino.lifecycle.management.outcome.Outcome;
 import com.clemble.casino.lifecycle.management.outcome.PlayerLostOutcome;
 import com.clemble.casino.money.Currency;
 import com.clemble.casino.money.Money;
+import org.joda.time.DateTimeZone;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -104,7 +105,7 @@ public class GoalMoveTimeoutPunishmentProcessingTest {
         // Step 1. Creating player A
         ClembleCasinoOperations A = playerScenarios.createPlayer();
         // Step 2. Creating goal request
-        GoalConstruction AC = A.goalOperations().constructionService().construct(new GoalConstructionRequest(LOOSE_PUNISHMENT, "Test loose timeout", "UTC"));
+        GoalConstruction AC = A.goalOperations().constructionService().construct(new GoalConstructionRequest(LOOSE_PUNISHMENT, "Test loose timeout", DateTimeZone.UTC));
         // Step 3. Checking AC
         Outcome expected = new PlayerLostOutcome(A.getPlayer());
         boolean check = AsyncUtils.check(() -> expected.equals(A.goalOperations().actionService().getState(AC.getGoalKey()).getOutcome()));
@@ -116,7 +117,7 @@ public class GoalMoveTimeoutPunishmentProcessingTest {
         // Step 1. Creating player A
         ClembleCasinoOperations A = playerScenarios.createPlayer();
         // Step 2. Creating goal request
-        GoalConstruction AC = A.goalOperations().constructionService().construct(new GoalConstructionRequest(PENALTY_PUNISHMENT, "Test penalty timeout", "UTC"));
+        GoalConstruction AC = A.goalOperations().constructionService().construct(new GoalConstructionRequest(PENALTY_PUNISHMENT, "Test penalty timeout", DateTimeZone.UTC));
         // Step 3. Checking AC
         // Step 4. Checking penalty due to move timeout
         boolean checkPenalized = AsyncUtils.check(() -> A.goalOperations().actionService().getState(AC.getGoalKey()).getBank().getPenalty().getAmount() != 0);

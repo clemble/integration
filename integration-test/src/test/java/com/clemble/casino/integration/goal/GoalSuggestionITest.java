@@ -12,6 +12,7 @@ import com.clemble.casino.integration.game.construction.PlayerScenarios;
 import com.clemble.casino.integration.utils.AsyncUtils;
 import com.clemble.casino.utils.CollectionUtils;
 import com.google.common.collect.ImmutableList;
+import org.joda.time.DateTimeZone;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,7 +40,7 @@ public class GoalSuggestionITest {
         Assert.assertEquals(A.goalOperations().suggestionService().listMy().size(), 0);
         Assert.assertEquals(B.goalOperations().suggestionService().listMy().size(), 0);
         GoalConfiguration configuration = A.goalOperations().configurationService().getConfigurations().get(0);
-        GoalSuggestion suggestionAtoB = A.goalOperations().suggestionService().addSuggestion(B.getPlayer(), new GoalSuggestionRequest("Test goal A", "UTC"));
+        GoalSuggestion suggestionAtoB = A.goalOperations().suggestionService().addSuggestion(B.getPlayer(), new GoalSuggestionRequest("Test goal A", DateTimeZone.UTC));
         // Step 3. Checking B have suggestion
         List<GoalSuggestion> suggestionAB = B.goalOperations().suggestionService().listMy();
         Assert.assertEquals(ImmutableList.of(suggestionAtoB), suggestionAB);
@@ -72,7 +73,7 @@ public class GoalSuggestionITest {
         Assert.assertEquals(A.goalOperations().suggestionService().listMy().size(), 0);
         Assert.assertEquals(B.goalOperations().suggestionService().listMy().size(), 0);
         GoalConfiguration configuration = A.goalOperations().configurationService().getConfigurations().get(0);
-        GoalSuggestion suggestionAtoB = A.goalOperations().suggestionService().addSuggestion(B.getPlayer(), new GoalSuggestionRequest("Test goal A", "UTC"));
+        GoalSuggestion suggestionAtoB = A.goalOperations().suggestionService().addSuggestion(B.getPlayer(), new GoalSuggestionRequest("Test goal A", DateTimeZone.UTC));
         // Step 3. Checking B have suggestion
         List<GoalSuggestion> suggestionAB = B.goalOperations().suggestionService().listMy();
         Assert.assertEquals(ImmutableList.of(suggestionAtoB), suggestionAB);
@@ -93,7 +94,7 @@ public class GoalSuggestionITest {
         Assert.assertEquals(A.goalOperations().suggestionService().listMy().size(), 0);
         Assert.assertEquals(B.goalOperations().suggestionService().listMy().size(), 0);
         GoalConfiguration configuration = A.goalOperations().configurationService().getConfigurations().get(0);
-        GoalSuggestion suggestionAtoB = A.goalOperations().suggestionService().addSuggestion(B.getPlayer(), new GoalSuggestionRequest("Test goal A", "UTC"));
+        GoalSuggestion suggestionAtoB = A.goalOperations().suggestionService().addSuggestion(B.getPlayer(), new GoalSuggestionRequest("Test goal A", DateTimeZone.UTC));
         // Step 3. Checking B have suggestion
         List<GoalSuggestion> suggestionAB = B.goalOperations().suggestionService().listMy();
         Assert.assertEquals(ImmutableList.of(suggestionAtoB), suggestionAB);

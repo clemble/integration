@@ -11,6 +11,7 @@ import com.clemble.casino.integration.utils.AsyncUtils;
 import com.clemble.test.concurrent.AsyncCompletionUtils;
 import com.clemble.test.concurrent.Check;
 import com.clemble.test.random.ObjectGenerator;
+import org.joda.time.DateTimeZone;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,7 +34,7 @@ public class GoalStatusUpdateITest {
         ClembleCasinoOperations A = playerScenarios.createPlayer();
         // Step 2. Creating GoalRequest
         GoalConfiguration CONFIGURATION = A.goalOperations().configurationService().getConfigurations().get(0);
-        GoalConstructionRequest goalRequest = new GoalConstructionRequest(CONFIGURATION, "Status update test", "UTC");
+        GoalConstructionRequest goalRequest = new GoalConstructionRequest(CONFIGURATION, "Status update test", DateTimeZone.UTC);
         final GoalConstruction construction = A.goalOperations().constructionService().construct(goalRequest);
         final String goalKey = construction.getGoalKey();
         // Step 3. Checking construction

@@ -9,6 +9,7 @@ import com.clemble.casino.goal.lifecycle.construction.GoalConstructionRequest;
 import com.clemble.casino.integration.ClembleIntegrationTest;
 import com.clemble.casino.integration.game.construction.PlayerScenarios;
 import com.clemble.casino.integration.utils.AsyncUtils;
+import org.joda.time.DateTimeZone;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,7 +33,7 @@ public class GoalDeadlineITest {
         final GoalOperations gA = A.goalOperations();
         // Step 2. Setting new goal
         final GoalConfiguration configuration = (GoalConfiguration) gA.configurationService().getConfigurations().get(0);
-        final GoalConstruction construction = gA.constructionService().construct(new GoalConstructionRequest(configuration, "Test deadline", "UTC"));
+        final GoalConstruction construction = gA.constructionService().construct(new GoalConstructionRequest(configuration, "Test deadline", DateTimeZone.UTC));
         final String goalKey = construction.getGoalKey();
         // Step 2.1. Checking goal initiated
         // Step 3. Checking goal has deadline in timeout
@@ -49,7 +50,7 @@ public class GoalDeadlineITest {
         final GoalOperations gA = A.goalOperations();
         // Step 2. Setting new goal
         final GoalConfiguration configuration = (GoalConfiguration) gA.configurationService().getConfigurations().get(0);
-        final GoalConstruction construction = gA.constructionService().construct(new GoalConstructionRequest(configuration, "Test deadline", "UTC"));
+        final GoalConstruction construction = gA.constructionService().construct(new GoalConstructionRequest(configuration, "Test deadline", DateTimeZone.UTC));
         final String goalKey = construction.getGoalKey();
         // Step 3. Checking goal has deadline in timeout
         Assert.assertTrue(AsyncUtils.checkNotNull(() -> gA.actionService().getState(goalKey)));

@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotNull;
 
 import com.clemble.casino.integration.ClembleIntegrationTest;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.joda.time.DateTimeZone;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +49,7 @@ public class PlayerOperationsITest {
             setLastName("Oparin").
             setGender(PlayerGender.M).
             setNickName(nickName).
-            setTimezone("UTC");
+            setTimezone(DateTimeZone.UTC);
 
         ClembleCasinoOperations player = playerOperations.createPlayer(profile);
 
@@ -69,7 +70,7 @@ public class PlayerOperationsITest {
             setLastName("Oparin").
             setGender(PlayerGender.M).
             setNickName(nickName).
-            setTimezone("UTC");
+            setTimezone(DateTimeZone.UTC);
 
         PlayerCredential playerCredential = new PlayerCredential(RandomStringUtils.randomAlphabetic(10) + "@gmail.com", "23443545");
 

@@ -7,28 +7,21 @@ import com.clemble.casino.client.event.EventTypeSelector;
 import com.clemble.casino.client.event.PlayerEventSelector;
 import com.clemble.casino.event.Event;
 import com.clemble.casino.integration.ClembleIntegrationTest;
-import com.clemble.casino.integration.event.EventAccumulator;
 import com.clemble.casino.integration.event.SystemEventAccumulator;
 import com.clemble.casino.integration.game.construction.EmailScenarios;
 import com.clemble.casino.integration.game.construction.PlayerScenarios;
-import com.clemble.casino.integration.spring.IntegrationTestSpringConfiguration;
 import com.clemble.casino.registration.PlayerCredential;
-import com.clemble.casino.registration.PlayerLoginRequest;
 import com.clemble.casino.registration.PlayerPasswordResetRequest;
 import com.clemble.casino.registration.PlayerPasswordRestoreRequest;
 import com.clemble.casino.server.event.SystemEvent;
 import com.clemble.casino.server.event.email.SystemEmailSendRequestEvent;
-import com.clemble.casino.server.spring.common.SpringConfiguration;
 import org.junit.Assert;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.test.annotation.IfProfileValue;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 
 /**
  * Created by mavarazy on 2/2/15.
@@ -77,7 +70,7 @@ public class PlayerPasswordResetTest {
         A.passwordResetService().reset(passwordResetRequest);
         A.signOut();
         // Step 6. Checking login with new password works
-        ClembleCasinoOperations A1 = playerScenarios.login(new PlayerLoginRequest(null, emailA, newPassword));
+        ClembleCasinoOperations A1 = playerScenarios.login(new PlayerCredential(emailA, newPassword));
         Assert.assertNotNull(A1);
         Assert.assertEquals(A1.getPlayer(), player);
     }

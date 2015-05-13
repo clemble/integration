@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import com.clemble.casino.error.ClembleCasinoError;
 import com.clemble.casino.integration.ClembleIntegrationTest;
-import com.clemble.casino.registration.PlayerLoginRequest;
 import com.clemble.casino.server.spring.common.SpringConfiguration;
 import com.clemble.casino.test.util.ClembleCasinoExceptionMatcherFactory;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -53,7 +52,7 @@ public class PlayerRegistrationServiceITest {
         ClembleCasinoOperations A = playerScenarios.register(credential, playerProfile);
 
         // Step 3. Creating CasinoOperations by just login
-        ClembleCasinoOperations emailA = playerScenarios.login(PlayerLoginRequest.create(credential));
+        ClembleCasinoOperations emailA = playerScenarios.login(credential);
         // Step 4. Checking they are the same
         assertEquals(A.getPlayer(), emailA.getPlayer());
         assertEquals(A.profileOperations().myProfile(), emailA.profileOperations().myProfile());
@@ -74,7 +73,7 @@ public class PlayerRegistrationServiceITest {
         ClembleCasinoOperations A = playerScenarios.register(credential, playerProfile);
 
         // Step 3. Creating CasinoOperations by just login
-        ClembleCasinoOperations nickA = playerScenarios.login(new PlayerLoginRequest(null, playerProfile.getNickName(), credential.getPassword()));
+        ClembleCasinoOperations nickA = playerScenarios.login(credential);
         // Step 4. Checking they are the same
         assertEquals(A.getPlayer(), nickA.getPlayer());
         assertEquals(A.profileOperations().myProfile(), nickA.profileOperations().myProfile());

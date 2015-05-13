@@ -71,17 +71,14 @@ public class GoalRecordITest {
         final String goalKey = construction.getGoalKey();
         // Step 3. Checking construction
         // Step 4. Checking value
-        AsyncCompletionUtils.check(new Check(){
-            @Override
-            public boolean check() {
-                Collection<EventRecord> events = A.goalOperations().actionService().getState(goalKey).getEventRecords();
-                for(EventRecord event: events) {
-                    if (event.getEvent() instanceof GoalEndedEvent)
-                        return true;
-                }
-                return false;
+        AsyncUtils.verify(() -> {
+            Collection<EventRecord> events = A.goalOperations().actionService().getState(goalKey).getEventRecords();
+            for (EventRecord event : events) {
+                if (event.getEvent() instanceof GoalEndedEvent)
+                    return true;
             }
-        }, 30_000);
+            return false;
+        });
     }
 
     @Test
@@ -94,12 +91,7 @@ public class GoalRecordITest {
         final String goalKey = construction.getGoalKey();
         // Step 3. Checking construction
         // Step 4. Checking goal started
-        AsyncCompletionUtils.check(new Check(){
-            @Override
-            public boolean check() {
-                return A.goalOperations().actionService().getState(goalKey) != null;
-            }
-        }, 30_000);
+        AsyncUtils.verify(() -> A.goalOperations().actionService().getState(goalKey) != null);
         // Step 5. Performing simple action
         A.goalOperations().actionService().process(goalKey, new GoalReachedAction("Win bitch"));
         // Step 6. Waiting for goal to completes

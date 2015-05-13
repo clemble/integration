@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import com.clemble.casino.integration.ClembleIntegrationTest;
+import com.clemble.casino.integration.utils.AsyncUtils;
 import com.clemble.casino.payment.bonus.RegistrationBonusPaymentSource;
 import com.clemble.casino.server.event.payment.SystemPaymentTransactionRequestEvent;
 import com.clemble.casino.server.payment.listener.SystemPaymentTransactionRequestEventListener;
@@ -141,12 +142,9 @@ public class PaymentTransactionOperationsTest {
         // Step 1. Creating player
         final ClembleCasinoOperations player = playerOperations.createPlayer();
         // Step 2. Checking account exists
-        PaymentTransaction paymentTransaction = AsyncCompletionUtils.get(new Get<PaymentTransaction>() {
-            @Override
-            public PaymentTransaction get() {
-                String transactionKey = RegistrationBonusPaymentSource.INSTANCE.toTransactionKey(player.getPlayer());
-                return player.paymentService().getTransaction(transactionKey);
-            }
+        PaymentTransaction paymentTransaction = AsyncUtils.get(() -> {
+            String transactionKey = RegistrationBonusPaymentSource.INSTANCE.toTransactionKey(player.getPlayer());
+            return player.paymentService().getTransaction(transactionKey);
         }, 5_000);
         Collection<PaymentOperation> associatedOperation = new ArrayList<>();
         for (PaymentOperation paymentOperation : paymentTransaction.getOperations()) {

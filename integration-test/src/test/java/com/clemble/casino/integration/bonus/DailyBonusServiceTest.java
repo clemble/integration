@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.concurrent.TimeUnit;
 
 import com.clemble.casino.integration.ClembleIntegrationTest;
+import com.clemble.casino.integration.utils.AsyncUtils;
 import com.clemble.test.concurrent.AsyncCompletionUtils;
 import com.clemble.test.concurrent.Check;
 import org.joda.time.DateTime;
@@ -54,12 +55,7 @@ public class DailyBonusServiceTest {
         // Step 3. Checking value in payment transaction
         dailyBonusService.onEvent(new SystemPlayerEnteredEvent(player));
         // Step 4. Checking new transaction performed
-        AsyncCompletionUtils.check(new Check() {
-            @Override
-            public boolean check() {
-                return transactionRepository.findByOperationsPlayer(player).size() ==  2;
-            }
-        }, 5000);
+        AsyncUtils.verify(() -> transactionRepository.findByOperationsPlayer(player).size() == 2);
         assertEquals(transactionRepository.findByOperationsPlayer(player).size(), 2);
         assertEquals(transactionRepository.findByOperationsPlayerAndTransactionKeyLike(player, "dailybonus").size(), 2);
     }

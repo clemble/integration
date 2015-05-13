@@ -38,10 +38,8 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.web.client.RestTemplate;
 
 import com.clemble.casino.android.AndroidCasinoRegistrationTemplate;
-import com.clemble.casino.android.player.AndroidFacadeRegistrationService;
 import com.clemble.casino.client.ClembleCasinoRegistrationOperations;
 import com.clemble.casino.client.error.ClembleCasinoResponseErrorHandler;
-import com.clemble.casino.registration.service.FacadeRegistrationService;
 import com.clemble.casino.server.spring.common.JsonSpringConfiguration;
 import com.clemble.casino.server.spring.web.ClientRestCommonSpringConfiguration;
 import com.clemble.casino.server.payment.spring.PaymentSpringConfiguration;
@@ -137,8 +135,8 @@ public class IntegrationTestSpringConfiguration implements TestSpringConfigurati
         }
 
         @Bean
-        public FacadeRegistrationService playerRegistrationService() {
-            return new AndroidFacadeRegistrationService(baseUrl);
+        public ClembleCasinoRegistrationOperations playerRegistrationService() {
+            return new AndroidCasinoRegistrationTemplate(baseUrl);
         }
 
     }

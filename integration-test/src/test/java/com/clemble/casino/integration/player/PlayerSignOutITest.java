@@ -1,11 +1,11 @@
 package com.clemble.casino.integration.player;
 
-import com.clemble.casino.android.player.AndroidFacadeRegistrationService;
+import com.clemble.casino.android.AndroidCasinoRegistrationTemplate;
 import com.clemble.casino.client.ClembleCasinoOperations;
+import com.clemble.casino.client.ClembleCasinoRegistrationOperations;
 import com.clemble.casino.error.ClembleCasinoError;
 import com.clemble.casino.integration.ClembleIntegrationTest;
 import com.clemble.casino.integration.game.construction.PlayerScenarios;
-import com.clemble.casino.registration.service.FacadeRegistrationService;
 import com.clemble.casino.server.spring.common.SpringConfiguration;
 import com.clemble.casino.test.util.ClembleCasinoExceptionMatcherFactory;
 import org.junit.Assert;
@@ -31,12 +31,12 @@ public class PlayerSignOutITest {
     public PlayerScenarios playerScenarios;
 
     @Autowired(required = false)
-    public FacadeRegistrationService facadeRegistrationService;
+    public ClembleCasinoRegistrationOperations facadeRegistrationService;
 
     @Test
     @IfProfileValue(name = SpringConfiguration.INTEGRATION_TEST)
     public void testSignOut() {
-        if (!(facadeRegistrationService instanceof AndroidFacadeRegistrationService))
+        if (!(facadeRegistrationService instanceof AndroidCasinoRegistrationTemplate))
             return;
         // Step 1. Creating player
         ClembleCasinoOperations A = playerScenarios.createPlayer();

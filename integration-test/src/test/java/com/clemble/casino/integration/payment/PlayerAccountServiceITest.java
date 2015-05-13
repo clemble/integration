@@ -6,6 +6,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
 import com.clemble.casino.integration.ClembleIntegrationTest;
+import com.clemble.casino.integration.utils.AsyncUtils;
 import com.clemble.casino.money.MoneySource;
 import com.clemble.casino.payment.bonus.RegistrationBonusPaymentSource;
 import com.clemble.casino.payment.event.PaymentEvent;
@@ -59,12 +60,7 @@ public class PlayerAccountServiceITest {
                 bonusLatch.add(event);
             }
         });
-        AsyncCompletionUtils.check(new Check() {
-            @Override
-            public boolean check() {
-                return A.paymentService().myTransactions().size() == 1;
-            }
-        }, 10_000);
+        AsyncUtils.verify(() -> A.paymentService().myTransactions().size() == 1);
         // Step 2. Fetching account and precondition
         PlayerAccount accountA = A.accountService().myAccount();
         assertTrue(accountA.getMoney().size() > 0);

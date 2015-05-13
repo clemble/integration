@@ -3,7 +3,6 @@ package com.clemble.casino.integration.player;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicReference;
 
-import com.clemble.casino.registration.PlayerLoginRequest;
 import org.springframework.test.context.TestContext;
 import org.springframework.test.context.support.AbstractTestExecutionListener;
 
@@ -27,7 +26,7 @@ public class IntegrationClembleCasinoRegistrationOperationsWrapper extends Abstr
     }
 
     @Override
-    public ClembleCasinoOperations login(PlayerLoginRequest playerCredentials) {
+    public ClembleCasinoOperations login(PlayerCredential playerCredentials) {
         ClembleCasinoOperations casinoOperations = delegate.get().login(playerCredentials);
         initializedOperations.add(casinoOperations);
         return casinoOperations;

@@ -68,11 +68,11 @@ public class AsyncUtils {
         });
     }
 
-    public static <T> T get(Callable<T> get, long getTimeout) {
+    public static <T> T get(Supplier<T> get, long getTimeout) {
         long timeout = System.currentTimeMillis() + getTimeout;
         while(timeout > System.currentTimeMillis()) {
             try {
-                T candidate = get.call();
+                T candidate = get.get();
                 if (candidate != null)
                     return candidate;
             } catch (Throwable throwable) {

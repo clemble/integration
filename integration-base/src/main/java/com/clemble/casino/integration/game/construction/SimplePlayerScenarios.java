@@ -7,7 +7,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import com.clemble.casino.integration.event.EventAccumulator;
 import com.clemble.casino.integration.utils.AsyncUtils;
 import com.clemble.casino.payment.bonus.RegistrationBonusPaymentSource;
-import com.clemble.casino.registration.PlayerLoginRequest;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import com.clemble.casino.client.ClembleCasinoOperations;
@@ -74,7 +73,7 @@ public class SimplePlayerScenarios implements PlayerScenarios {
     }
 
     @Override
-    public ClembleCasinoOperations login(PlayerLoginRequest loginRequest) {
+    public ClembleCasinoOperations login(PlayerCredential loginRequest) {
         return initialize(registrationOperations.login(loginRequest));
     }
 

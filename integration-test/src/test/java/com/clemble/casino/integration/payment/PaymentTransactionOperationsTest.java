@@ -24,7 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.clemble.casino.client.ClembleCasinoOperations;
-import com.clemble.casino.error.ClembleCasinoError;
+import com.clemble.casino.error.ClembleErrorCode;
 import com.clemble.casino.integration.game.construction.PlayerScenarios;
 import com.clemble.casino.test.util.ClembleCasinoExceptionMatcherFactory;
 import com.clemble.casino.payment.PaymentOperation;
@@ -32,8 +32,6 @@ import com.clemble.casino.payment.PaymentTransaction;
 import com.clemble.casino.money.Currency;
 import com.clemble.casino.money.Money;
 import com.clemble.casino.money.Operation;
-import com.clemble.test.concurrent.AsyncCompletionUtils;
-import com.clemble.test.concurrent.Get;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ClembleIntegrationTest
@@ -65,7 +63,7 @@ public class PaymentTransactionOperationsTest {
             .addOperation(
                 new PaymentOperation(anotherPlayer.getPlayer(), Money.create(Currency.point, 50), Operation.Debit));
 
-        expectedException.expect(ClembleCasinoExceptionMatcherFactory.fromErrors(ClembleCasinoError.PaymentTransactionDebitAndCreditNotMatched));
+        expectedException.expect(ClembleCasinoExceptionMatcherFactory.fromErrors(ClembleErrorCode.PaymentTransactionDebitAndCreditNotMatched));
 
         eventListener.onEvent(SystemPaymentTransactionRequestEvent.create(paymentTransaction));
     }
@@ -134,7 +132,7 @@ public class PaymentTransactionOperationsTest {
 
         assertEquals(savedPaymentTransaction, paymentTransaction);
 
-        expectedException.expect(ClembleCasinoExceptionMatcherFactory.fromErrors(ClembleCasinoError.PaymentTransactionAccessDenied));
+        expectedException.expect(ClembleCasinoExceptionMatcherFactory.fromErrors(ClembleErrorCode.PaymentTransactionAccessDenied));
     }
 
     @Test

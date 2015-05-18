@@ -22,7 +22,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.clemble.casino.client.ClembleCasinoOperations;
 import com.clemble.casino.client.event.EventListener;
 import com.clemble.casino.client.event.EventTypeSelector;
-import com.clemble.casino.error.ClembleCasinoError;
+import com.clemble.casino.error.ClembleErrorCode;
 import com.clemble.casino.integration.game.construction.PlayerScenarios;
 import com.clemble.casino.test.util.ClembleCasinoExceptionMatcherFactory;
 import com.clemble.casino.payment.PaymentOperation;
@@ -30,8 +30,6 @@ import com.clemble.casino.payment.PaymentTransaction;
 import com.clemble.casino.payment.PlayerAccount;
 import com.clemble.casino.money.Currency;
 import com.clemble.casino.money.Money;
-import com.clemble.test.concurrent.AsyncCompletionUtils;
-import com.clemble.test.concurrent.Check;
 
 import static org.junit.Assert.*;
 
@@ -159,7 +157,7 @@ public class PlayerAccountServiceITest {
         // Step 2. Checking no other player can't access the transactions
         ClembleCasinoOperations anotherPlayer = playerOperations.createPlayer();
         // Step 3. Checking no other player can access the transactions
-        expectedException.expect(ClembleCasinoExceptionMatcherFactory.fromErrors(ClembleCasinoError.PaymentTransactionAccessDenied));
+        expectedException.expect(ClembleCasinoExceptionMatcherFactory.fromErrors(ClembleErrorCode.PaymentTransactionAccessDenied));
         player.paymentService().getTransaction(anotherPlayer.getPlayer() + MoneySource.registration);
     }
 

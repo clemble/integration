@@ -3,7 +3,7 @@ package com.clemble.casino.integration.player;
 import com.clemble.casino.android.AndroidCasinoRegistrationTemplate;
 import com.clemble.casino.client.ClembleCasinoOperations;
 import com.clemble.casino.client.ClembleCasinoRegistrationOperations;
-import com.clemble.casino.error.ClembleCasinoError;
+import com.clemble.casino.error.ClembleErrorCode;
 import com.clemble.casino.integration.ClembleIntegrationTest;
 import com.clemble.casino.integration.game.construction.PlayerScenarios;
 import com.clemble.casino.server.spring.common.SpringConfiguration;
@@ -45,7 +45,7 @@ public class PlayerSignOutITest {
         // Step 2.1. Sign out from application
         A.signOut();
         // Step 3. Checking profile operation is no longer allowed
-        expectedException.expect(ClembleCasinoExceptionMatcherFactory.fromErrors(ClembleCasinoError.ServerError));
+        expectedException.expect(ClembleCasinoExceptionMatcherFactory.fromErrors(ClembleErrorCode.ServerError));
         A.profileOperations().myProfile();
     }
 

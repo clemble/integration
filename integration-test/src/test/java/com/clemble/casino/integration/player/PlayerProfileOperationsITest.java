@@ -3,7 +3,6 @@ package com.clemble.casino.integration.player;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
@@ -18,15 +17,12 @@ import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.ConnectionKey;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.clemble.casino.client.ClembleCasinoOperations;
 import com.clemble.casino.player.service.PlayerProfileService;
-import com.clemble.casino.error.ClembleCasinoError;
+import com.clemble.casino.error.ClembleErrorCode;
 import com.clemble.casino.integration.game.construction.PlayerScenarios;
-import com.clemble.casino.integration.spring.IntegrationTestSpringConfiguration;
 import com.clemble.casino.test.util.ClembleCasinoExceptionMatcherFactory;
 import com.clemble.casino.player.PlayerProfile;
 import com.clemble.test.random.ObjectGenerator;
@@ -91,7 +87,7 @@ public class PlayerProfileOperationsITest {
     public void testProfileReadNonExistent() {
         ClembleCasinoOperations player = playerScenarios.createPlayer();
 
-        expectedException.expect(ClembleCasinoExceptionMatcherFactory.fromErrors(ClembleCasinoError.PlayerProfileDoesNotExists));
+        expectedException.expect(ClembleCasinoExceptionMatcherFactory.fromErrors(ClembleErrorCode.PlayerProfileDoesNotExists));
 
         player.profileOperations().getProfile("-12345");
     }
@@ -137,7 +133,7 @@ public class PlayerProfileOperationsITest {
         PlayerProfile playerProfile = A.profileOperations().myProfile();
         playerProfile.addSocialConnection(new ConnectionKey("facebook", "323232"));
 
-        expectedException.expect(ClembleCasinoExceptionMatcherFactory.fromErrors(ClembleCasinoError.ProfileSocialCantBeEdited));
+        expectedException.expect(ClembleCasinoExceptionMatcherFactory.fromErrors(ClembleErrorCode.ProfileSocialCantBeEdited));
 
         A.profileOperations().updateProfile(playerProfile);
     }
@@ -156,7 +152,7 @@ public class PlayerProfileOperationsITest {
         PlayerProfile newProfile = randomProfile();
         newProfile.setPlayer(player.getPlayer());
 
-        expectedException.expect(ClembleCasinoExceptionMatcherFactory.fromErrors(ClembleCasinoError.PlayerNotProfileOwner));
+        expectedException.expect(ClembleCasinoExceptionMatcherFactory.fromErrors(ClembleErrorCode.PlayerNotProfileOwner));
 
         anotherPlayer.profileOperations().updateProfile(newProfile);
     }
@@ -173,7 +169,7 @@ public class PlayerProfileOperationsITest {
         playerProfile.setPlayer(player.getPlayer());
         Assert.assertEquals(playerProfile, player.profileOperations().myProfile());
 
-        expectedException.expect(ClembleCasinoExceptionMatcherFactory.fromPossibleErrors(ClembleCasinoError.PlayerProfileInvalid, ClembleCasinoError.ServerError));
+        expectedException.expect(ClembleCasinoExceptionMatcherFactory.fromPossibleErrors(ClembleErrorCode.PlayerProfileInvalid, ClembleErrorCode.ServerError));
 
         player.profileOperations().updateProfile(null);
     }
@@ -192,7 +188,7 @@ public class PlayerProfileOperationsITest {
         PlayerProfile newProfile = randomProfile();
         newProfile.setPlayer(RandomStringUtils.random(5));
 
-        expectedException.expect(ClembleCasinoExceptionMatcherFactory.fromErrors(ClembleCasinoError.PlayerNotProfileOwner));
+        expectedException.expect(ClembleCasinoExceptionMatcherFactory.fromErrors(ClembleErrorCode.PlayerNotProfileOwner));
 
         Assert.assertEquals(newProfile, player.profileOperations().updateProfile(newProfile));
     }

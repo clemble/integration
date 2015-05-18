@@ -2,7 +2,7 @@ package com.clemble.casino.integration.player;
 
 import static org.junit.Assert.assertEquals;
 
-import com.clemble.casino.error.ClembleCasinoError;
+import com.clemble.casino.error.ClembleErrorCode;
 import com.clemble.casino.integration.ClembleIntegrationTest;
 import com.clemble.casino.server.spring.common.SpringConfiguration;
 import com.clemble.casino.test.util.ClembleCasinoExceptionMatcherFactory;
@@ -93,7 +93,7 @@ public class PlayerRegistrationServiceITest {
                 .setNickName(null)
                 .setBirthDate(new DateTime(0))
                 .setSocialConnections(null);
-        expectedException.expect(ClembleCasinoExceptionMatcherFactory.fromErrors(ClembleCasinoError.NickMustNotBeNull));
+        expectedException.expect(ClembleCasinoExceptionMatcherFactory.fromErrors(ClembleErrorCode.NickMustNotBeNull));
         // Step 2. Creating CasinoOperations with this credentials and Profile
         ClembleCasinoOperations origA = playerScenarios.register(credential, playerProfile);
         // Step 3. Checking nick matches
@@ -115,7 +115,7 @@ public class PlayerRegistrationServiceITest {
                 .setBirthDate(new DateTime(0))
                 .setSocialConnections(null)
                 .setNickName(RandomStringUtils.randomAlphabetic(3));
-        expectedException.expect(ClembleCasinoExceptionMatcherFactory.fromErrors(ClembleCasinoError.NickTooShort));
+        expectedException.expect(ClembleCasinoExceptionMatcherFactory.fromErrors(ClembleErrorCode.NickTooShort));
         // Step 2. Creating CasinoOperations with this credentials and Profile
         ClembleCasinoOperations origA = playerScenarios.register(credential, playerProfile);
         // Step 3. Checking nick matches
@@ -135,7 +135,7 @@ public class PlayerRegistrationServiceITest {
                 .setBirthDate(new DateTime(0))
                 .setSocialConnections(null)
                 .setNickName(RandomStringUtils.random(128));
-        expectedException.expect(ClembleCasinoExceptionMatcherFactory.fromErrors(ClembleCasinoError.NickTooLong));
+        expectedException.expect(ClembleCasinoExceptionMatcherFactory.fromErrors(ClembleErrorCode.NickTooLong));
         // Step 2. Creating CasinoOperations with this credentials and Profile
         ClembleCasinoOperations origA = playerScenarios.register(credential, playerProfile);
         // Step 3. Checking nick matches
@@ -162,7 +162,7 @@ public class PlayerRegistrationServiceITest {
                 .setBirthDate(new DateTime(0))
                 .setSocialConnections(null)
                 .setNickName(AplayerProfile.getNickName());
-        expectedException.expect(ClembleCasinoExceptionMatcherFactory.fromErrors(ClembleCasinoError.NickOccupied));
+        expectedException.expect(ClembleCasinoExceptionMatcherFactory.fromErrors(ClembleErrorCode.NickOccupied));
         // Step 4. Creating CasinoOperations with this credentials and Profile
         playerScenarios.register(Bcredential, BplayerProfile);
     }

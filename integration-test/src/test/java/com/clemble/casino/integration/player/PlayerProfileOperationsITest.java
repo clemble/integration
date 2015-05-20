@@ -169,7 +169,7 @@ public class PlayerProfileOperationsITest {
         playerProfile.setPlayer(player.getPlayer());
         Assert.assertEquals(playerProfile, player.profileOperations().myProfile());
 
-        expectedException.expect(ClembleCasinoExceptionMatcherFactory.fromPossibleErrors(ClembleErrorCode.PlayerProfileInvalid, ClembleErrorCode.ServerError));
+        expectedException.expect(ClembleCasinoExceptionMatcherFactory.fromPossibleErrors(ClembleErrorCode.PlayerProfileInvalid, ClembleErrorCode.GeneralError));
 
         player.profileOperations().updateProfile(null);
     }

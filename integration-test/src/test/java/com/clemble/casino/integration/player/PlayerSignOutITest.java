@@ -45,7 +45,7 @@ public class PlayerSignOutITest {
         // Step 2.1. Sign out from application
         A.signOut();
         // Step 3. Checking profile operation is no longer allowed
-        expectedException.expect(ClembleCasinoExceptionMatcherFactory.fromErrors(ClembleErrorCode.ServerError));
+        expectedException.expect(ClembleCasinoExceptionMatcherFactory.fromErrors(ClembleErrorCode.GeneralError));
         A.profileOperations().myProfile();
     }
 

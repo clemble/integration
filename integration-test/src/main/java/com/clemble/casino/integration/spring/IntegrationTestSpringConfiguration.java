@@ -3,8 +3,8 @@ package com.clemble.casino.integration.spring;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.clemble.casino.goal.configuration.spring.GoalConfigurationSpringConfiguration;
-import com.clemble.casino.goal.construction.spring.GoalConstructionSpringConfiguration;
+import com.clemble.casino.goal.spring.GoalConfigurationSpringConfiguration;
+import com.clemble.casino.goal.spring.GoalConstructionSpringConfiguration;
 import com.clemble.casino.goal.spring.GoalManagementSpringConfiguration;
 import com.clemble.casino.goal.suggestion.spring.GoalSuggestionSpringConfiguration;
 import com.clemble.casino.integration.event.SystemEventAccumulator;

@@ -1,6 +1,6 @@
 package com.clemble.casino.integration.goal;
 
-import com.clemble.casino.goal.configuration.controller.GoalConfigurationController;
+import com.clemble.casino.goal.controller.GoalConfigurationController;
 import com.clemble.casino.goal.lifecycle.configuration.GoalConfiguration;
 import com.clemble.casino.goal.lifecycle.configuration.GoalConfigurationChoices;
 import com.clemble.casino.goal.lifecycle.configuration.IntervalGoalConfigurationBuilder;

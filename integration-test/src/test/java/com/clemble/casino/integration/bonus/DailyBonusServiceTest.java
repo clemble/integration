@@ -6,8 +6,6 @@ import java.util.concurrent.TimeUnit;
 
 import com.clemble.casino.integration.ClembleIntegrationTest;
 import com.clemble.casino.integration.utils.AsyncUtils;
-import com.clemble.test.concurrent.AsyncCompletionUtils;
-import com.clemble.test.concurrent.Check;
 import org.joda.time.DateTime;
 import org.junit.Test;
 import org.junit.runner.RunWith;

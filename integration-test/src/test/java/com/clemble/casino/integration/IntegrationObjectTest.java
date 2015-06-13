@@ -19,6 +19,7 @@ import com.clemble.casino.lifecycle.configuration.Configuration;
 import com.clemble.casino.lifecycle.configuration.rule.bet.FixedBidRule;
 import com.clemble.casino.notification.PlayerNotification;
 import com.clemble.casino.payment.*;
+import com.clemble.casino.player.PlayerConnection;
 import com.clemble.casino.player.event.PlayerInvitationAcceptedAction;
 import com.clemble.casino.player.event.PlayerInvitationAction;
 import com.clemble.casino.event.action.PlayerExpectedAction;
@@ -27,7 +28,7 @@ import com.clemble.casino.lifecycle.management.event.action.bet.BetAction;
 import com.clemble.casino.lifecycle.management.event.action.surrender.GiveUpAction;
 
 import com.clemble.casino.lifecycle.configuration.rule.ConfigurationRule;
-import com.clemble.casino.player.notification.PlayerConnectedNotification;
+import com.clemble.casino.player.notification.PlayerConnectionAddNotification;
 import com.clemble.casino.post.PlayerPost;
 import com.clemble.casino.security.ClembleConsumerDetails;
 import com.clemble.casino.security.ClientDetails;
@@ -98,7 +99,7 @@ public class IntegrationObjectTest {
         ObjectGenerator.register(PlayerNotification.class, new AbstractValueGenerator<PlayerNotification>() {
             @Override
             public PlayerNotification generate() {
-                return new PlayerConnectedNotification("A:B", "A", "B", DateTime.now(DateTimeZone.UTC));
+                return new PlayerConnectionAddNotification("A:B", "A", new PlayerConnection("B", ""), DateTime.now(DateTimeZone.UTC));
             }
         });
         ObjectGenerator.register(FixedBidRule.class, new AbstractValueGenerator<FixedBidRule>() {

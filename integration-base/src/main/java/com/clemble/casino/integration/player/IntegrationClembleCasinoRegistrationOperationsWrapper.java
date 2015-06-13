@@ -22,7 +22,7 @@ public class IntegrationClembleCasinoRegistrationOperationsWrapper extends Abstr
     }
 
     public IntegrationClembleCasinoRegistrationOperationsWrapper(ClembleCasinoRegistrationOperations delegate){
-        this.delegate.set(delegate);
+        IntegrationClembleCasinoRegistrationOperationsWrapper.delegate.set(delegate);
     }
 
     @Override

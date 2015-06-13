@@ -84,7 +84,7 @@ public class GoalPhoneNotificationTest {
         GoalConstructionRequest requestA = new GoalConstructionRequest(CONFIGURATION, "Test sms notification", DateTimeZone.UTC);
         A.goalOperations().constructionService().construct(requestA);
         // Step 3. Checking timeout sms notification received
-        SystemPhoneSMSSendRequestEvent reminderNotification = (SystemPhoneSMSSendRequestEvent) systemPhoneSMSSendRequestEventAccumulator.waitFor(smsSelector);
+        SystemPhoneSMSSendRequestEvent reminderNotification = systemPhoneSMSSendRequestEventAccumulator.waitFor(smsSelector);
         Assert.assertNotNull(reminderNotification);
         Assert.assertEquals(reminderNotification.getTemplate(), "goal_due");
     }
@@ -107,7 +107,7 @@ public class GoalPhoneNotificationTest {
         );
         B.goalOperations().actionService().process(constructionA.getGoalKey(), new BetAction(100));
         // Step 6. Checking value
-        SystemPhoneSMSSendRequestEvent reminderNotification = (SystemPhoneSMSSendRequestEvent) systemPhoneSMSSendRequestEventAccumulator.waitFor(BSMSSelector);
+        SystemPhoneSMSSendRequestEvent reminderNotification = systemPhoneSMSSendRequestEventAccumulator.waitFor(BSMSSelector);
         Assert.assertNotNull(reminderNotification);
         Assert.assertEquals(reminderNotification.getTemplate(), "goal_due");
     }

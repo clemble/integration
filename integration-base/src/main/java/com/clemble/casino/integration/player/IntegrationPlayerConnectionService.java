@@ -4,6 +4,7 @@ import static com.clemble.casino.utils.Preconditions.checkNotNull;
 
 import java.util.Set;
 
+import com.clemble.casino.player.PlayerConnection;
 import com.clemble.casino.player.service.PlayerConnectionService;
 import com.clemble.casino.server.connection.controller.PlayerConnectionController;
 
@@ -23,12 +24,12 @@ public class IntegrationPlayerConnectionService implements PlayerConnectionServi
     }
 
     @Override
-    public Set<String> myConnections() {
+    public Set<PlayerConnection> myConnections() {
         return connectionService.myConnections(player);
     }
 
     @Override
-    public Set<String> getConnections(String player) {
+    public Set<PlayerConnection> getConnections(String player) {
         return connectionService.getConnections(player);
     }
 

@@ -9,14 +9,14 @@ import com.clemble.casino.registration.PlayerRegistrationRequest;
 
 public interface PlayerScenarios extends ClembleCasinoRegistrationOperations {
 
-    public ClembleCasinoOperations createPlayer();
+    ClembleCasinoOperations createPlayer();
 
-    public ClembleCasinoOperations createPlayer(PlayerProfile playerProfile);
+    ClembleCasinoOperations createPlayer(PlayerProfile playerProfile);
 
-    public ClembleCasinoOperations createPlayer(SocialAccessGrant socialConnectionData);
+    ClembleCasinoOperations createPlayer(SocialAccessGrant socialConnectionData);
 
-    public ClembleCasinoOperations createPlayer(SocialConnectionData socialConnectionData);
+    ClembleCasinoOperations createPlayer(SocialConnectionData socialConnectionData);
 
-    public ClembleCasinoOperations createPlayer(PlayerRegistrationRequest playerRegistrationRequest);
+    ClembleCasinoOperations createPlayer(PlayerRegistrationRequest playerRegistrationRequest);
 
 }

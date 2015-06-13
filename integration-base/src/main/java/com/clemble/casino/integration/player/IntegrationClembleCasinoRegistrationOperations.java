@@ -9,7 +9,7 @@ import com.clemble.casino.integration.goal.IntegrationGoalOperationsFactory;
 import com.clemble.casino.player.PlayerProfile;
 import com.clemble.casino.registration.*;
 import com.clemble.casino.registration.service.PlayerSocialRegistrationService;
-import com.clemble.casino.server.connection.controller.PlayerFriendInvitationController;
+import com.clemble.casino.server.connection.controller.PlayerConnectionInvitationController;
 import com.clemble.casino.server.email.controller.PlayerEmailController;
 import com.clemble.casino.server.post.controller.PlayerFeedController;
 import com.clemble.casino.server.registration.controller.PlayerPasswordController;
@@ -24,7 +24,6 @@ import com.clemble.casino.server.profile.controller.PlayerProfileController;
 import com.clemble.server.tag.controller.PlayerTagController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.clemble.casino.server.notification.controller.PlayerNotificationController;
-import org.springframework.mock.web.MockHttpServletResponse;
 
 public class IntegrationClembleCasinoRegistrationOperations implements ClembleCasinoRegistrationOperations {
 
@@ -35,7 +34,7 @@ public class IntegrationClembleCasinoRegistrationOperations implements ClembleCa
     final private PlayerProfileController profileOperations;
     final private PlayerImageController imageService;
     final private PlayerConnectionController connectionService;
-    final private PlayerFriendInvitationController invitationService;
+    final private PlayerConnectionInvitationController invitationService;
     final private PlayerAccountController paymentService;
     final private PaymentTransactionController paymentTransactionService;
     final private EventListenerOperationsFactory listenerOperations;
@@ -55,7 +54,7 @@ public class IntegrationClembleCasinoRegistrationOperations implements ClembleCa
         PlayerProfileController profileOperations,
         PlayerImageController imageService,
         PlayerConnectionController connectionService,
-        PlayerFriendInvitationController invitationService,
+        PlayerConnectionInvitationController invitationService,
         PlayerAccountController accountOperations,
         PaymentTransactionController paymentTransactionService,
         IntegrationGoalOperationsFactory goalOperationsFactory,

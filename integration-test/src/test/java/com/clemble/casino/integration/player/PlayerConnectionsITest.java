@@ -4,6 +4,7 @@ import com.clemble.casino.client.ClembleCasinoOperations;
 import com.clemble.casino.integration.ClembleIntegrationTest;
 import com.clemble.casino.integration.game.construction.PlayerScenarios;
 import com.clemble.casino.integration.spring.IntegrationTestSpringConfiguration;
+import com.clemble.casino.player.PlayerConnection;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,7 +28,7 @@ public class PlayerConnectionsITest {
     @Test
     public void testEmptyConnections() {
         final ClembleCasinoOperations A = playerScenarios.createPlayer();
-        final Set<String> aConnections = A.connectionOperations().myConnections();
+        final Set<PlayerConnection> aConnections = A.connectionOperations().myConnections();
         Assert.assertNotNull(aConnections);
         Assert.assertEquals(aConnections.size(), 0);
     }

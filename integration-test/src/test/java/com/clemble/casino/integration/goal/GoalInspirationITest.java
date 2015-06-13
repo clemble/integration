@@ -12,6 +12,7 @@ import com.clemble.casino.integration.game.construction.PlayerScenarios;
 import com.clemble.casino.integration.utils.AsyncUtils;
 import com.clemble.casino.lifecycle.management.event.action.surrender.GiveUpAction;
 import com.clemble.casino.money.Currency;
+import com.clemble.casino.money.Money;
 import org.joda.time.DateTimeZone;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,7 +38,7 @@ public class GoalInspirationITest {
         // Step 1. Creating new player
         ClembleCasinoOperations A = playerScenarios.createPlayer();
         // Step 2. Checking A does not have any inspirations
-        AsyncUtils.verify(() -> A.accountService().myAccount().getMoney(Currency.inspiration) == null);
+        AsyncUtils.verify(() -> A.accountService().myAccount().getMoney(Currency.inspiration).equals(Money.create(Currency.inspiration, 0)));
         // Step 3. Specify a goal
         GoalConfiguration configuration = A.goalOperations().configurationService().getConfigurations().get(0);
         GoalConstruction construction = A.goalOperations().constructionService().construct(new GoalConstructionRequest(configuration, "Test inspirations added", DateTimeZone.UTC));

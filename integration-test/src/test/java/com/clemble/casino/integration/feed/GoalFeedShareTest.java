@@ -11,12 +11,10 @@ import com.clemble.casino.goal.lifecycle.construction.GoalConstruction;
 import com.clemble.casino.goal.lifecycle.construction.GoalConstructionRequest;
 import com.clemble.casino.goal.post.GoalStartedPost;
 import com.clemble.casino.integration.ClembleIntegrationTest;
-import com.clemble.casino.integration.event.EventAccumulator;
 import com.clemble.casino.integration.event.SystemEventAccumulator;
 import com.clemble.casino.integration.game.construction.PlayerScenarios;
 import com.clemble.casino.integration.utils.AsyncUtils;
-import com.clemble.casino.player.Invitation;
-import com.clemble.casino.server.event.SystemEvent;
+import com.clemble.casino.player.PlayerConnectionInvitation;
 import com.clemble.casino.server.event.share.SystemSharePostEvent;
 import com.clemble.casino.social.SocialProvider;
 import org.joda.time.DateTimeZone;
@@ -46,11 +44,11 @@ public class GoalFeedShareTest {
         // Step 1. Creating player A
         final ClembleCasinoOperations A = playerScenarios.createPlayer();
         final ClembleCasinoOperations B = playerScenarios.createPlayer();
-        B.friendInvitationService().invite(new Invitation(A.getPlayer()));
+        B.friendInvitationService().invite(A.getPlayer());
         A.friendInvitationService().reply(B.getPlayer(), true);
         final GoalOperations goalA = A.goalOperations();
         // Step 2. Checking configuration
-        final GoalConfiguration configuration = (GoalConfiguration) goalA.configurationService().getConfigurations().get(0);
+        final GoalConfiguration configuration = goalA.configurationService().getConfigurations().get(0);
         // Step 3. Creating construction
         final GoalConstruction constructionA = goalA.constructionService().construct(new GoalConstructionRequest(configuration, "Goal A", DateTimeZone.UTC));
         // Step 4. Checking post appeared in player feed

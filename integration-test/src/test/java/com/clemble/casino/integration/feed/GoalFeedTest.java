@@ -21,7 +21,7 @@ import com.clemble.casino.lifecycle.configuration.rule.timeout.*;
 import com.clemble.casino.lifecycle.management.event.action.bet.BetAction;
 import com.clemble.casino.money.Currency;
 import com.clemble.casino.money.Money;
-import com.clemble.casino.player.Invitation;
+import com.clemble.casino.player.PlayerConnectionInvitation;
 import org.joda.time.DateTimeZone;
 import org.junit.Assert;
 import org.junit.Test;
@@ -46,7 +46,7 @@ public class GoalFeedTest {
         // Step 1. Creating player A & B
         final ClembleCasinoOperations A = playerScenarios.createPlayer();
         final ClembleCasinoOperations B = playerScenarios.createPlayer();
-        B.friendInvitationService().invite(new Invitation(A.getPlayer()));
+        B.friendInvitationService().invite(A.getPlayer());
         A.friendInvitationService().reply(B.getPlayer(), true);
         final GoalOperations goalA = A.goalOperations();
         // Step 2. Checking configuration
@@ -64,7 +64,7 @@ public class GoalFeedTest {
         // Step 1. Creating player A
         final ClembleCasinoOperations A = playerScenarios.createPlayer();
         final ClembleCasinoOperations B = playerScenarios.createPlayer();
-        B.friendInvitationService().invite(new Invitation(A.getPlayer()));
+        B.friendInvitationService().invite(A.getPlayer());
         A.friendInvitationService().reply(B.getPlayer(), true);
         final GoalOperations goalA = A.goalOperations();
         final GoalOperations goalB = B.goalOperations();
@@ -109,7 +109,7 @@ public class GoalFeedTest {
         // Step 1. Creating player A
         final ClembleCasinoOperations A = playerScenarios.createPlayer();
         final ClembleCasinoOperations B = playerScenarios.createPlayer();
-        B.friendInvitationService().invite(new Invitation(A.getPlayer()));
+        B.friendInvitationService().invite(A.getPlayer());
         A.friendInvitationService().reply(B.getPlayer(), true);
         final GoalOperations goalA = A.goalOperations();
         // Step 2. Checking configuration
@@ -129,7 +129,7 @@ public class GoalFeedTest {
         // Step 1. Creating player A
         final ClembleCasinoOperations A = playerScenarios.createPlayer();
         final ClembleCasinoOperations B = playerScenarios.createPlayer();
-        B.friendInvitationService().invite(new Invitation(A.getPlayer()));
+        B.friendInvitationService().invite(A.getPlayer());
         A.friendInvitationService().reply(B.getPlayer(), true);
         final GoalOperations goalA = A.goalOperations();
         // Step 2. Checking configuration
@@ -167,7 +167,7 @@ public class GoalFeedTest {
         // Step 1. Creating player A
         final ClembleCasinoOperations A = playerScenarios.createPlayer();
         final ClembleCasinoOperations B = playerScenarios.createPlayer();
-        B.friendInvitationService().invite(new Invitation(A.getPlayer()));
+        B.friendInvitationService().invite(A.getPlayer());
         A.friendInvitationService().reply(B.getPlayer(), true);
         final GoalOperations goalA = A.goalOperations();
         // Step 3. Creating construction

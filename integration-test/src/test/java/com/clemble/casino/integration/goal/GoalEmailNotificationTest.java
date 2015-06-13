@@ -83,7 +83,7 @@ public class GoalEmailNotificationTest {
         GoalConstructionRequest requestA = new GoalConstructionRequest(CONFIGURATION, "Test email notification", DateTimeZone.UTC);
         A.goalOperations().constructionService().construct(requestA);
         // Step 3. Checking timeout email notification received
-        SystemEmailSendRequestEvent reminderNotification = (SystemEmailSendRequestEvent) systemEmailSendRequestEventAccumulator.waitFor(emailSelector);
+        SystemEmailSendRequestEvent reminderNotification = systemEmailSendRequestEventAccumulator.waitFor(emailSelector);
         Assert.assertNotNull(reminderNotification);
         Assert.assertEquals(reminderNotification.getTemplate(), "goal_due");
     }
@@ -109,7 +109,7 @@ public class GoalEmailNotificationTest {
         );
         B.goalOperations().actionService().process(constructionA.getGoalKey(), new BetAction(100));
         // Step 5. Checking value
-        SystemEmailSendRequestEvent reminderNotification = (SystemEmailSendRequestEvent) systemEmailSendRequestEventAccumulator.waitFor(BEmailSelector);
+        SystemEmailSendRequestEvent reminderNotification = systemEmailSendRequestEventAccumulator.waitFor(BEmailSelector);
         Assert.assertNotNull(reminderNotification);
         Assert.assertEquals(reminderNotification.getTemplate(), "goal_due");
     }

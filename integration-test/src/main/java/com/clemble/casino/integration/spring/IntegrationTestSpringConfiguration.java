@@ -3,9 +3,11 @@ package com.clemble.casino.integration.spring;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.clemble.casino.goal.controller.GoalVictoryController;
 import com.clemble.casino.goal.spring.GoalConfigurationSpringConfiguration;
 import com.clemble.casino.goal.spring.GoalConstructionSpringConfiguration;
 import com.clemble.casino.goal.spring.GoalManagementSpringConfiguration;
+import com.clemble.casino.goal.spring.GoalVictorySpringConfiguration;
 import com.clemble.casino.goal.suggestion.spring.GoalSuggestionSpringConfiguration;
 import com.clemble.casino.integration.event.SystemEventAccumulator;
 import com.clemble.casino.integration.game.construction.EmailScenarios;
@@ -67,6 +69,7 @@ public class IntegrationTestSpringConfiguration implements TestSpringConfigurati
         PlayerNotificationSpringConfiguration.class,
         GoalConstructionSpringConfiguration.class,
         GoalConfigurationSpringConfiguration.class,
+        GoalVictorySpringConfiguration.class,
         GoalManagementSpringConfiguration.class,
         WebJsonSpringConfiguration.class,
         GoalSuggestionSpringConfiguration.class,

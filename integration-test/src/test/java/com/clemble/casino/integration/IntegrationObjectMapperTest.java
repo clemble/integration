@@ -53,7 +53,7 @@ public class IntegrationObjectMapperTest extends IntegrationObjectTest {
     }
 
     @Test
-    public void testGiveUpReadWrite() throws JsonParseException, JsonMappingException, IOException {
+    public void testGiveUpReadWrite() throws IOException {
         GiveUpAction event = new GiveUpAction();
         String stringEvent = objectMapper.writeValueAsString(event);
         GiveUpAction readEvent = (GiveUpAction) objectMapper.readValue(stringEvent, Event.class);
@@ -103,7 +103,6 @@ public class IntegrationObjectMapperTest extends IntegrationObjectTest {
             }
         }
         Assert.assertTrue(errors.toString(), errors.isEmpty());
-
     }
 
     private Throwable checkSerialization(Class<?> candidate) {

@@ -29,8 +29,17 @@ public class IntegrationPlayerConnectionService implements PlayerConnectionServi
     }
 
     @Override
+    public Integer myConnectionsCount() {
+        return connectionService.myConnectionsCount(player);
+    }
+
+    @Override
     public Set<PlayerConnection> getConnections(String player) {
         return connectionService.getConnections(player);
     }
 
+    @Override
+    public Integer getConnectionsCount(String player) {
+        return connectionService.getConnectionsCount(player);
+    }
 }

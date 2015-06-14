@@ -19,12 +19,7 @@ public class IntegrationPlayerImageService implements PlayerImageService {
 
     @Override
     public byte[] myImage() {
-        return imageService.myImage();
-    }
-
-    @Override
-    public byte[] mySmallImage() {
-        return imageService.mySmallImage();
+        return imageService.getImage(player);
     }
 
     @Override
@@ -32,8 +27,4 @@ public class IntegrationPlayerImageService implements PlayerImageService {
         return imageService.getImage(player);
     }
 
-    @Override
-    public byte[] getSmallImage(String player) {
-        return imageService.getSmallImage(player);
-    }
 }

@@ -25,8 +25,18 @@ public class IntegrationGoalVictoryService implements GoalVictoryService {
     }
 
     @Override
+    public Integer countMy() {
+        return victoryService.countMy(player);
+    }
+
+    @Override
     public List<GoalState> list(String player) {
         return victoryService.list(player);
+    }
+
+    @Override
+    public Integer count(String player) {
+        return victoryService.count(player);
     }
 
 }

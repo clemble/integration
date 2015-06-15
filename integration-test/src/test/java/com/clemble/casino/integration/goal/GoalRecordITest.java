@@ -18,7 +18,7 @@ import com.clemble.casino.integration.utils.AsyncUtils;
 import com.clemble.casino.lifecycle.configuration.rule.bet.LimitedBetRule;
 import com.clemble.casino.lifecycle.configuration.rule.breach.LooseBreachPunishment;
 import com.clemble.casino.lifecycle.configuration.rule.timeout.*;
-import com.clemble.casino.lifecycle.management.outcome.PlayerWonOutcome;
+import com.clemble.casino.lifecycle.management.outcome.Outcome;
 import com.clemble.casino.lifecycle.record.EventRecord;
 import com.clemble.casino.money.Currency;
 import com.clemble.casino.money.Money;
@@ -102,7 +102,7 @@ public class GoalRecordITest {
             }
             return false;
         });
-        Assert.assertEquals(A.goalOperations().actionService().getState(goalKey).getOutcome(), new PlayerWonOutcome(A.getPlayer()));
+        Assert.assertEquals(A.goalOperations().actionService().getState(goalKey).getOutcome(), Outcome.won);
     }
 
 }
